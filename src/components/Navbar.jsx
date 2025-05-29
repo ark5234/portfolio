@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react"; // ✅ Import icons
-
+import { Menu, X } from "lucide-react"; 
 const navItems = [
   { name: "Home", href: "#hero" },
   { name: "About", href: "#about" },

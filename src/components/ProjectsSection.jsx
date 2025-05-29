@@ -43,7 +43,7 @@ export const ProjectsSection = () => {
           Click on the project titles to view them live or check out the source code on GitHub.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-2 gap-10">
           {projects.map((project) => (
             <div
               key={project.id}
