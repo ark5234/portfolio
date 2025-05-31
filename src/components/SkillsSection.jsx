@@ -81,21 +81,17 @@ export const SkillsSection = () => {
                     {filteredSkills.map((skill, key) => (
                         <div
                             key={key}
-                            className="bg-white dark:bg-black p-6 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300"
+                                className="group relative p-6 rounded-2xl transition-all duration-300 
+                                     bg-white dark:bg-black shadow-md 
+                                     hover:bg-[#f0f4ff] dark:hover:bg-[#0a0a0a] 
+                                        hover:shadow-[0_0_20px_5px_rgba(127,90,240,0.4)] 
+                                        dark:hover:shadow-[0_0_25px_8px_rgba(0,240,255,0.4)]"
                         >
-                            <h3 className="text-xl font-semibold mb-2 text-primary">
-                                {skill.name}
-                            </h3>
-                            <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden mb-2">
-                                <div
-                                    className={`bg-primary h-full rounded-full origin-left animate-[grow_1.5s_ease-in-out]`}
-                                    style={{ width: `${skill.level}%` }}
-                                ></div>
-                            </div>
-                            <p className="text-sm text-muted-foreground">
-                                Level: {skill.level}%
-                            </p>
+                        <h3 className="text-xl font-semibold text-center text-primary group-hover:scale-105 transition-transform">
+                            {skill.name}
+                        </h3>
                         </div>
+
                     ))}
                 </div>
             </div>
