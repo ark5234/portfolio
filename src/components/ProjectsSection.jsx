@@ -47,11 +47,11 @@ export const ProjectsSection = () => {
           {projects.map((project) => (
             <div
               key={project.id}
-              className="group rounded-4xl overflow-hidden transition-all duration-300 
-                          bg-card shadow-md 
-                        hover:bg-[#f0f4ff] dark:hover:bg-[#0a0a0a]
-                          hover:shadow-[0_0_20px_6px_rgba(127,90,240,0.4)] 
-                          dark:hover:shadow-[0_0_25px_8px_rgba(0,240,255,0.4)]"
+              className="group rounded-4xl overflow-hidden transition-all duration-300
+  bg-card shadow-md text-black dark:text-white
+  hover:bg-[#f0f4ff] dark:hover:bg-[#0a0a0a]
+  hover:shadow-[0_0_25px_6px_rgba(127,90,240,0.4)]
+  dark:hover:shadow-[0_0_25px_8px_rgba(0,240,255,0.4)]"
             >
               <div className="h-76 overflow-hidden">
                 <img
@@ -65,15 +65,17 @@ export const ProjectsSection = () => {
                 <h3 className="text-xl font-semibold text-primary mb-2">
                   {project.title}
                 </h3>
-                <p className="text-muted-foreground text-sm mb-4">
+                <p className="text-sm mb-4 text-black dark:text-muted-foreground group-hover:text-black dark:group-hover:text-white">
                   {project.description}
                 </p>
 
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag) => (
                     <span
-                      className="px-2 py-1 text-xs font-medium border rounded-full bg-muted text-secondary-foreground"
                       key={tag}
+                      className="px-2 py-1 text-xs font-medium border rounded-full 
+     bg-muted text-black dark:text-secondary-foreground 
+     group-hover:text-black dark:group-hover:text-white group-hover:bg-muted/70"
                     >
                       {tag}
                     </span>
@@ -85,7 +87,7 @@ export const ProjectsSection = () => {
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-primary hover:underline flex items-center gap-1"
+                    className="text-sm text-muted-foreground hover:underline flex items-center gap-1 group-hover:text-black dark:group-hover:text-white"
                   >
                     <ExternalLink className="w-4 h-4" aria-hidden="true" />
                     View Project
@@ -94,7 +96,7 @@ export const ProjectsSection = () => {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-muted-foreground hover:underline flex items-center gap-1"
+                    className="text-sm text-muted-foreground hover:underline flex items-center gap-1 group-hover:text-black dark:group-hover:text-white"
                   >
                     <Github className="w-4 h-4" aria-hidden="true" />
                     View Code
@@ -103,19 +105,24 @@ export const ProjectsSection = () => {
               </div>
             </div>
           ))}
-          
-
         </div>
+
         <div className="text-center mt-16">
-            <a 
-                className= "cosmic-button inline-flex items-center gap-2 mx-auto px-5 py-3 rounded-full bg-primary text-background text-sm font-semibold shadow-md hover:bg-primary/90 hover:shadow-lg transition-all duration-300 ring-1 ring-primary/50" 
-                href="https://github.com/ark5234" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                >
-                    View My GitHub <ArrowRight size={18} className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
-           </div>
+          <a
+            className="cosmic-button inline-flex items-center gap-2 mx-auto px-5 py-3 rounded-full 
+                      bg-primary text-background text-sm font-semibold shadow-md 
+                      hover:bg-primary/90 hover:shadow-lg transition-all duration-300 ring-1 ring-primary/50"
+            href="https://github.com/ark5234"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View My GitHub{" "}
+            <ArrowRight
+              size={18}
+              className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+            />
+          </a>
+        </div>
       </div>
     </section>
   );

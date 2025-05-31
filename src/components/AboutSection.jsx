@@ -48,7 +48,10 @@ export const AboutSection = () => {
 
           {/* Info Cards */}
           <div className="grid grid-cols-1 gap-6">
-            <div className="p-6 rounded-3xl bg-card shadow-md transition-all duration-300 hover:shadow-[0_0_25px_6px_rgba(127,90,240,0.3)] dark:hover:shadow-[0_0_25px_8px_rgba(0,240,255,0.3)]">
+            <div className="p-6 rounded-3xl bg-white dark:bg-card shadow-md transition-all duration-300 
+                    hover:bg-primary/20 dark:hover:bg-[#0a0a0a] 
+                    hover:shadow-[0_0_25px_6px_rgba(127,90,240,0.4)] 
+                    dark:hover:shadow-[0_0_25px_8px_rgba(0,240,255,0.3)]">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-full bg-primary/10">
                   <Code className="h-6 w-6 text-primary" />
@@ -62,7 +65,10 @@ export const AboutSection = () => {
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-card shadow-md transition-all duration-300 hover:shadow-[0_0_25px_6px_rgba(127,90,240,0.3)] dark:hover:shadow-[0_0_25px_8px_rgba(0,240,255,0.3)]">
+            <div className="p-6 rounded-3xl bg-white dark:bg-card shadow-md transition-all duration-300 
+                    hover:bg-primary/20 dark:hover:bg-[#0a0a0a] 
+                    hover:shadow-[0_0_25px_6px_rgba(127,90,240,0.4)] 
+                    dark:hover:shadow-[0_0_25px_8px_rgba(0,240,255,0.3)]">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-full bg-primary/10">
                   <User className="h-6 w-6 text-primary" />
@@ -76,7 +82,10 @@ export const AboutSection = () => {
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-card shadow-md transition-all duration-300 hover:shadow-[0_0_25px_6px_rgba(127,90,240,0.3)] dark:hover:shadow-[0_0_25px_8px_rgba(0,240,255,0.3)]">
+            <div className="p-6 rounded-3xl bg-white dark:bg-card shadow-md transition-all duration-300 
+                    hover:bg-primary/20 dark:hover:bg-[#0a0a0a] 
+                    hover:shadow-[0_0_25px_6px_rgba(127,90,240,0.4)] 
+                    dark:hover:shadow-[0_0_25px_8px_rgba(0,240,255,0.3)]">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-full bg-primary/10">
                   <Briefcase className="h-6 w-6 text-primary" />
