@@ -47,7 +47,11 @@ export const ProjectsSection = () => {
           {projects.map((project) => (
             <div
               key={project.id}
-              className="group bg-card rounded-4xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg"
+              className="group rounded-4xl overflow-hidden transition-all duration-300 
+                          bg-card shadow-md 
+                        hover:bg-[#f0f4ff] dark:hover:bg-[#0a0a0a]
+                          hover:shadow-[0_0_20px_6px_rgba(127,90,240,0.4)] 
+                          dark:hover:shadow-[0_0_25px_8px_rgba(0,240,255,0.4)]"
             >
               <div className="h-76 overflow-hidden">
                 <img
