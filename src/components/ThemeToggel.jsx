@@ -1,4 +1,3 @@
-// components/ThemeToggle.tsx
 import { Sun, Moon } from "lucide-react";
 import { useEffect, useState } from "react";
 

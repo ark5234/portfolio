@@ -21,6 +21,20 @@ export const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+  if (isMenuOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
+
+  // Cleanup on unmount
+  return () => {
+    document.body.style.overflow = "";
+  };
+}, [isMenuOpen]);
+
+
   return (
     <nav
       className={cn(
@@ -52,7 +66,7 @@ export const Navbar = () => {
               {item.name}
             </a>
           ))}
-          {/* ✅ Theme Toggle in Navbar */}
+          
           <ThemeToggle />
         </div>
 
@@ -86,7 +100,7 @@ export const Navbar = () => {
               {item.name}
             </a>
           ))}
-          {/* ✅ Theme Toggle in Mobile Menu */}
+   
           <ThemeToggle />
         </div>
       </div>
