@@ -29,172 +29,127 @@ export const ContactSection = () => {
       setIsSubmitting(false);
     }, 1500);
   };
+  
+  const ContactItem = ({ icon, title, value, link }) => (
+  <div className="flex items-start space-x-4">
+    <div className="p-3 rounded-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 shadow-md">
+      {icon}
+    </div>
+    <div>
+      <h4 className="font-semibold text-white">{title}</h4>
+      {link ? (
+        <a
+          href={link}
+          className="text-gray-300 hover:text-teal-300 transition-colors"
+        >
+          {value}
+        </a>
+      ) : (
+        <span className="text-gray-300">{value}</span>
+      )}
+    </div>
+  </div>
+);
+
+const InputField = ({ id, label, type = "text", placeholder }) => (
+  <div className="mb-5">
+    <label htmlFor={id} className="block mb-2 text-sm font-medium text-gray-300">
+      {label}
+    </label>
+    <input
+      type={type}
+      id={id}
+      name={id}
+      required
+      className="w-full px-4 py-3 rounded-lg bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-400"
+      placeholder={placeholder}
+    />
+  </div>
+);
+
+const TextAreaField = ({ id, label, placeholder }) => (
+  <div className="mb-5">
+    <label htmlFor={id} className="block mb-2 text-sm font-medium text-gray-300">
+      {label}
+    </label>
+    <textarea
+      id={id}
+      name={id}
+      rows="5"
+      required
+      className="w-full px-4 py-3 rounded-lg bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-400"
+      placeholder={placeholder}
+    />
+  </div>
+);
+
   return (
-    <section id="contact" className="backdrop-blur-xs shadow-inner">
-      <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-          Get In <span className="text-orange-400"> Touch</span>
-        </h2>
+    <section
+  id="contact"
+  className="py-20 px-6 bg-gradient-to-br from-[#1e1e2f] via-[#2d2e4a] to-[#1b1c2b] dark:from-[#0f0f1f] dark:via-[#111125] dark:to-[#0a0a15] text-white relative z-10"
+>
+  <div className="container max-w-6xl mx-auto">
+    <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-6 bg-gradient-to-r from-teal-400 via-blue-500 to-purple-500 text-transparent bg-clip-text">
+      Get In Touch
+    </h2>
+    <p className="text-center text-gray-300 max-w-2xl mx-auto mb-12">
+      Have a project in mind or want to collaborate? Feel free to reach out.
+      I'm always open to new ideas, opportunities, and creative discussions.
+    </p>
 
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Have a project in mind or want to collaborate? Feel free to reach out.
-          I'm always open to discussing new opportunities.
-        </p>
+    <div className="grid md:grid-cols-2 gap-12">
+      {/* Contact Info */}
+      <div className="space-y-10">
+        <div className="space-y-6">
+          <ContactItem icon={<Mail />} title="Email" value="vikrantkawadkar2099@gmail.com" link="mailto:vikrantkawadkar2099@gmail.com" />
+          <ContactItem icon={<Phone />} title="Phone" value="+91 94099 14760" link="tel:+919409914760" />
+          <ContactItem icon={<MapPin />} title="Location" value="Ahmedabad, Gujarat, India" />
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="space-y-8">
-            <h3 className="text-2xl font-semibold mb-6">
-              {" "}
-              Contact Information
-            </h3>
-
-            <div className="space-y-6 justify-center">
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Mail className="h-6 w-6 text-primary" />{" "}
-                </div>
-                <div>
-                  <h4 className="font-medium"> Email</h4>
-                  <a
-                    href="mailto:vikrantkawadkar2099@gmail.com"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    vikrantkawadkar2099@gmail.com
-                  </a>
-                </div>
-              </div>
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Phone className="h-6 w-6 text-primary" />{" "}
-                </div>
-                <div>
-                  <h4 className="font-medium"> Phone</h4>
-                  <a
-                    href="tel:+919409914760"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    +91 94099 14760
-                  </a>
-                </div>
-              </div>
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <MapPin className="h-6 w-6 text-primary" />{" "}
-                </div>
-                <div>
-                  <h4 className="font-medium"> Location</h4>
-                  <a className="text-muted-foreground hover:text-primary transition-colors">
-                    Ahmedabad, Gujarat, India
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-8">
-              <h4 className="font-medium mb-4"> Connect With Me</h4>
-              <div className="flex space-x-4 justify-center">
-                <a href="https://www.linkedin.com/in/vikrant-kawadkar-0b9073251"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  <Linkedin />
-                </a>
-                <a 
-                  href="https://x.com/KawadkarVikrant"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors">
-                  <Twitter />
-                </a>
-                <a 
-                  href="https://www.instagram.com/vikrantkawadkar/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors">
-                  <Instagram />
-                </a>
-                <a href="#" target="_blank">
-                  <Twitch />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div
-            className="bg-card p-8 rounded-lg shadow-xs"
-            onSubmit={handleSubmit}
-          >
-            <h3 className="text-2xl font-semibold mb-6"> Send a Message</h3>
-
-            <form className="space-y-6">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium mb-2"
-                >
-                  {" "}
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary"
-                  placeholder="Your Name..."
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium mb-2"
-                >
-                  {" "}
-                  Your Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary"
-                  placeholder="Your Email Address..."
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium mb-2"
-                >
-                  {" "}
-                  Your Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary resize-none"
-                  placeholder="Whats on your mind?"
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className={cn(
-                  "cosmic-button w-full flex items-center justify-center gap-2"
-                )}
+        <div>
+          <h4 className="text-lg font-semibold mb-3 text-teal-300">Connect with me</h4>
+          <div className="flex space-x-4">
+            {[
+              { href: "https://linkedin.com/in/vikrant-kawadkar-0b9073251", icon: <Linkedin /> },
+              { href: "https://x.com/KawadkarVikrant", icon: <Twitter /> },
+              { href: "https://instagram.com/vikrantkawadkar", icon: <Instagram /> },
+              { href: "#", icon: <Twitch /> },
+            ].map(({ href, icon }, i) => (
+              <a
+                key={i}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-teal-300 transition duration-300 transform hover:scale-110"
               >
-                {isSubmitting ? "Sending..." : "Send Message"}
-                <Send size={16} />
-              </button>
-            </form>
+                {icon}
+              </a>
+            ))}
           </div>
         </div>
       </div>
-    </section>
+
+      {/* Contact Form */}
+      <form
+        onSubmit={handleSubmit}
+        className="bg-[#1c1c2c] rounded-3xl p-8 shadow-lg ring-1 ring-white/10"
+      >
+        <h3 className="text-2xl font-bold mb-6 text-teal-300">Send a Message</h3>
+        <InputField id="name" label="Your Name" placeholder="Enter your name..." />
+        <InputField id="email" label="Your Email" type="email" placeholder="you@example.com" />
+        <TextAreaField id="message" label="Your Message" placeholder="What's on your mind?" />
+
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="mt-4 w-full py-3 px-6 rounded-lg font-semibold bg-gradient-to-r from-teal-400 via-blue-500 to-purple-600 text-white shadow-xl transition-all duration-300 hover:shadow-[0_0_20px_5px_rgba(0,255,255,0.3)]"
+        >
+          {isSubmitting ? "Sending..." : "Send Message"} <Send className="inline ml-2" size={18} />
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
   );
 };
