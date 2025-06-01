@@ -1,17 +1,21 @@
+// components/ThemeToggle.tsx
 import { Sun, Moon } from "lucide-react";
 import { useEffect, useState } from "react";
-import {cn} from "@/lib/utils";
 
 export const ThemeToggle = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
-    if (storedTheme === "dark") {
+
+    if (
+      storedTheme === "dark" ||
+      (!storedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
       document.documentElement.classList.add("dark");
       setIsDarkMode(true);
     } else {
-      localStorage.setItem("theme", "light");
+      document.documentElement.classList.remove("dark");
       setIsDarkMode(false);
     }
   }, []);
@@ -30,16 +34,14 @@ export const ThemeToggle = () => {
 
   return (
     <button
-     onClick={toggleTheme}
-     className={cn(
-        "fixed max-sm:hidden top-5 right-5 z-50 rounded-full transition-colors duration-300",
-        "focous-outline-hidden"
-    )}
-        >
+      onClick={toggleTheme}
+      aria-label="Toggle Theme"
+      className="ml-4 p-2 rounded-full bg-background/80 backdrop-blur-md shadow ring-1 ring-white/20 hover:ring-orange-400 transition"
+    >
       {isDarkMode ? (
-        <Sun className="h-6 w-6 text-yellow-300" />
+        <Sun className="h-5 w-5 text-yellow-400 transition-transform hover:rotate-180" />
       ) : (
-        <Moon className="h-6 w-6 text-dark-blue-300" />
+        <Moon className="h-5 w-5 text-blue-600 dark:text-blue-300 transition-transform hover:-rotate-180" />
       )}
     </button>
   );
