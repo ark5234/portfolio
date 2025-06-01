@@ -7,6 +7,7 @@ import { SkillsSection } from "../components/SkillsSection";
 import { ProjectsSection } from "../components/ProjectsSection";
 import { ContactSection } from "../components/ContactSection";
 import { Footer } from "../components/Footer";
+import { BackToTop } from "../components/BackToTop";
 
 
 
@@ -29,6 +30,7 @@ export const Home = () => {
             <ProjectsSection />
             <SkillsSection />
             <ContactSection />
+            <BackToTop />
 
         </main>
 

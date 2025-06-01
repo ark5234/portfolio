@@ -1,20 +1,25 @@
-import { ArrowUp } from "lucide-react";
-
 export const Footer = () => {
     return (
-        <footer className="py-12 px-4 bg-card relative border-t border-border mt-12 pt-8 flex flex-wrap justify-between items-center">
-            {" "}
-            <p className="text-xl text-mutwed-foreground">
-                
-                &copy; {new Date().getFullYear()} VIKRANT KAWADKAR. All rights reserved.
-            </p>
-            <a 
-                href="#hero" 
-                className="flex items-center gap-2 p-3 rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-colors"
-                >
-                    Back to top
-                <ArrowUp className="w-6 h-6" />
-            </a>
+        <footer className="py-5 px-4 
+        bg-card relative 
+        border-t border-[#44475a]
+        mt-5 pt-8 
+        flex flex-wrap 
+        justify-center items-center
+        text-center
+        "
+        >
+
+       <p className="text-sm md:text-base tracking-wide">
+          <span className="text-[#ffb86c] font-semibold">
+            &copy; {new Date().getFullYear()}
+          </span>{" "}
+          <span className="text-[#93abf9] font-semibold hover:text-[#7a4ea5] transition-colors duration-300">
+            Vikrant Kawadkar
+          </span>.{" "}
+          <span className="text-[#58c89d] font-medium">All rights reserved.</span>
+        </p>
+            
         </footer>
     );
 }

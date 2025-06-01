@@ -41,7 +41,7 @@ export const ProjectsSection = () => {
     <section id="projects" className="py-24 px-4 relative">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-foreground">
-          My <span className="text-primary">Projects</span>
+          My <span className="text-orange-400">Projects</span>
         </h2>
 
         <p className="text-lg md:text-xl text-muted-foreground text-center mb-16 max-w-3xl mx-auto">

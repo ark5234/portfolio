@@ -44,7 +44,7 @@ export const SkillsSection = () => {
     <section id="skills" className="py-20 px-4 bg-transparent">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-foreground">
-          My <span className="text-primary">Skills</span>
+          My <span className="text-orange-400">Skills</span>
         </h2>
 
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
