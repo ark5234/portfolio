@@ -101,32 +101,67 @@ const TextAreaField = ({ id, label, placeholder }) => (
       {/* Contact Info */}
       <div className="space-y-10">
         <div className="space-y-6">
-          <ContactItem icon={<Mail />} title="Email" value="vikrantkawadkar2099@gmail.com" link="mailto:vikrantkawadkar2099@gmail.com" />
-          <ContactItem icon={<Phone />} title="Phone" value="+91 94099 14760" link="tel:+919409914760" />
-          <ContactItem icon={<MapPin />} title="Location" value="Ahmedabad, Gujarat, India" />
-        </div>
-
-        <div>
-          <h4 className="text-lg font-semibold mb-3 text-teal-300">Connect with me</h4>
-          <div className="flex space-x-4">
-            {[
-              { href: "https://linkedin.com/in/vikrant-kawadkar-0b9073251", icon: <Linkedin /> },
-              { href: "https://x.com/KawadkarVikrant", icon: <Twitter /> },
-              { href: "https://instagram.com/vikrantkawadkar", icon: <Instagram /> },
-              { href: "#", icon: <Twitch /> },
-            ].map(({ href, icon }, i) => (
-              <a
-                key={i}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-300 hover:text-teal-300 transition duration-300 transform hover:scale-110"
-              >
-                {icon}
-              </a>
-            ))}
+              <ContactItem
+                  icon={<Mail />}
+                  title="Email"
+                  value="vikrantkawadkar2099@gmail.com"
+                  link="mailto:vikrantkawadkar2099@gmail.com"
+              />
+              <ContactItem
+                  icon={<Phone />}
+                  title="Phone"
+                  value="+91 94099 14760"
+                  link="tel:+919409914760"
+              />
+              <ContactItem
+                  icon={<MapPin />}
+                  title="Location"
+                  value="Ahmedabad, Gujarat, India"
+              />
           </div>
-        </div>
+
+          
+
+        <div className="flex items-start space-x-4">
+  <div className="p-3 rounded-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 shadow-md">
+    <Send className="text-white" />
+  </div>
+  <div>
+    <h4 className="font-semibold text-white mb-2">Connect with me</h4>
+    <div className="flex items-center space-x-4">
+      {[
+        {
+          href: "https://linkedin.com/in/vikrant-kawadkar-0b9073251",
+          icon: <Linkedin />,
+        },
+        {
+          href: "https://x.com/KawadkarVikrant",
+          icon: <Twitter />,
+        },
+        {
+          href: "https://instagram.com/vikrantkawadkar",
+          icon: <Instagram />,
+        },
+        {
+          href: "#",
+          icon: <Twitch />,
+        },
+      ].map(({ href, icon }, i) => (
+        <a
+          key={i}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-gray-300 hover:text-teal-300 transition duration-300 transform hover:scale-110"
+        >
+          <div className="p-2 bg-[#1e1e2f] dark:bg-[#1c1c2c] rounded-full">
+            {icon}
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</div>
       </div>
 
       {/* Contact Form */}
