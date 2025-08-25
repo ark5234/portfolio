@@ -15,7 +15,15 @@
   --animate-fade-in-delay-2: fade-in 0.7s ease-out 0.4s forwards;
   --animate-fade-in-delay-3: fade-in 0.7s ease-out 0.6s forwards;
   --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.8s forwards;
+  --animate-fade-in-delay-5: fade-in 0.7s ease-out 1s forwards;
+  --animate-fade-in-delay-6: fade-in 0.7s ease-out 1.2s forwards;
   --animate-meteor: meteor 15s linear infinite;
+  --animate-tilt-in-left: tilt-in-left 800ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  --animate-tilt-in-right: tilt-in-right 800ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  --animate-tilt-in-center: fade-in 700ms ease-out forwards;
+  --animate-roll-in-left: roll-in-left 1500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  --animate-roll-in-right: roll-in-right 1500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  --animate-roll-in-center: roll-in-center 1600ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
   
   
   @keyframes float {
@@ -61,6 +69,70 @@
       opacity: 0;
     }
   }
+
+  /* 3D tilt-in keyframes */
+  @keyframes tilt-in-left {
+    0% {
+      opacity: 0;
+      transform: perspective(1000px) rotateY(-20deg) translateX(-40px) translateY(10px) scale(0.98);
+      filter: blur(1px);
+    }
+    100% {
+      opacity: 1;
+      transform: perspective(1000px) rotateY(0deg) translateX(0) translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+  @keyframes tilt-in-right {
+    0% {
+      opacity: 0;
+      transform: perspective(1000px) rotateY(20deg) translateX(40px) translateY(10px) scale(0.98);
+      filter: blur(1px);
+    }
+    100% {
+      opacity: 1;
+      transform: perspective(1000px) rotateY(0deg) translateX(0) translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  /* Box roll-in keyframes */
+  @keyframes roll-in-left {
+    0% {
+      opacity: 0;
+      transform: perspective(1000px) rotateY(-35deg) translateX(-60px) translateY(10px) scale(0.96);
+      filter: blur(1px);
+    }
+    100% {
+      opacity: 1;
+      transform: perspective(1000px) rotateY(0deg) translateX(0) translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+  @keyframes roll-in-right {
+    0% {
+      opacity: 0;
+      transform: perspective(1000px) rotateY(35deg) translateX(60px) translateY(10px) scale(0.96);
+      filter: blur(1px);
+    }
+    100% {
+      opacity: 1;
+      transform: perspective(1000px) rotateY(0deg) translateX(0) translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+  @keyframes roll-in-center {
+    0% {
+      opacity: 0;
+      transform: perspective(1000px) rotateX(12deg) translateY(28px) scale(0.975);
+      filter: blur(0.5px);
+    }
+    100% {
+      opacity: 1;
+      transform: perspective(1000px) rotateX(0deg) translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
 }
 
 @layer base {
@@ -90,6 +162,23 @@
   body {
     @apply bg-background text-foreground transition-colors duration-300;
     font-feature-settings: "rlig", 1, "calt", 1;
+  }
+
+  /* Smooth theme flip helper: temporarily apply transitions to common props */
+  .theme-animate *, .theme-animate {
+    transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease, fill 220ms ease, stroke 220ms ease, box-shadow 220ms ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-roll-in-left,
+    .animate-roll-in-right,
+    .animate-roll-in-center {
+      animation: none !important;
+      opacity: 1 !important;
+    }
+    .theme-animate *, .theme-animate {
+      transition: none !important;
+    }
   }
 }
 

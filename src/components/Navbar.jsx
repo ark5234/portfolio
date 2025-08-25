@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle} from "./ThemeToggel";
@@ -14,6 +14,9 @@ const navItems = [
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const overlayRef = useRef(null);
+  const startYRef = useRef(null);
+  const bodyScrollYRef = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -21,18 +24,59 @@ export const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Robust body scroll lock (iOS-safe) when mobile menu is open
   useEffect(() => {
-  if (isMenuOpen) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "";
-  }
+    const body = document.body;
+    if (isMenuOpen) {
+      bodyScrollYRef.current = window.scrollY;
+      body.style.position = "fixed";
+      body.style.top = `-${bodyScrollYRef.current}px`;
+      body.style.width = "100%";
+      body.style.overflow = "hidden";
+    } else {
+      const y = -parseInt(body.style.top || "0", 10) || 0;
+      body.style.position = "";
+      body.style.top = "";
+      body.style.width = "";
+      body.style.overflow = "";
+      if (y) window.scrollTo(0, y);
+    }
+    return () => {
+      body.style.position = "";
+      body.style.top = "";
+      body.style.width = "";
+      body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
 
-  // Cleanup on unmount
-  return () => {
-    document.body.style.overflow = "";
-  };
-}, [isMenuOpen]);
+  // Close menu on swipe-up gesture on the overlay
+  useEffect(() => {
+    const el = overlayRef.current;
+    if (!el) return;
+    const onTouchStart = (e) => {
+      startYRef.current = e.touches?.[0]?.clientY ?? null;
+    };
+    const onTouchMove = (e) => {
+      if (startYRef.current == null) return;
+      const currentY = e.touches?.[0]?.clientY ?? startYRef.current;
+      const delta = currentY - startYRef.current; // negative = swipe up
+      if (delta < -60) {
+        setIsMenuOpen(false);
+        startYRef.current = null;
+      }
+    };
+    const onTouchEnd = () => {
+      startYRef.current = null;
+    };
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchmove", onTouchMove, { passive: true });
+    el.addEventListener("touchend", onTouchEnd, { passive: true });
+    return () => {
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchmove", onTouchMove);
+      el.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [isMenuOpen]);
 
 
   return (
@@ -73,7 +117,8 @@ export const Navbar = () => {
         {/* Mobile Menu Toggle */}
         <button
           onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="md:hidden text-foreground z-50 p-2"
+          className="md:hidden text-foreground z-50 p-2 active:scale-95 transition-transform"
+          aria-expanded={isMenuOpen}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -81,7 +126,8 @@ export const Navbar = () => {
       </div>
 
       {/* Mobile Nav */}
-      <div
+  <div
+    ref={overlayRef}
         className={cn(
           "fixed inset-0 bg-background/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center md:hidden transition-all duration-500",
           isMenuOpen
@@ -95,13 +141,13 @@ export const Navbar = () => {
               key={item.name}
               href={item.href}
               onClick={() => setIsMenuOpen(false)}
-              className="text-foreground/80 hover:text-orange-400 transition duration-300 font-semibold"
+      className="text-foreground/80 hover:text-orange-400 active:opacity-70 active:translate-y-px transition duration-200 font-semibold"
             >
               {item.name}
             </a>
           ))}
    
-          <ThemeToggle />
+      <div className="active:scale-95 transition-transform"><ThemeToggle /></div>
         </div>
       </div>
     </nav>

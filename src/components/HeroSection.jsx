@@ -1,10 +1,12 @@
 import { ArrowDown } from "lucide-react";
 
 export const HeroSection = () => {
+
+  
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden bg-white dark:bg-transparent transition-colors duration-500"
+      className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden bg-background dark:bg-transparent transition-colors duration-500"
     >
       {/* Subtle Background Glow or Stars */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -16,7 +18,7 @@ export const HeroSection = () => {
       <div className="container max-w-4xl mx-auto text-center z-10 min-h-screen flex flex-col justify-center">
         <div className="space-y-6">
           <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
-            <span className="block text-orange dark:text-orange opacity-0 animate-fade-in-delay-1">
+            <span className="block text-foreground opacity-0 animate-fade-in-delay-1">
                   Hello, I'm
             </span>
 
@@ -25,16 +27,17 @@ export const HeroSection = () => {
             </span>
           </h1>
 
-          <p className="text-lg md:text-2xl block text-orange dark:text-orange max-w-2xl mx-auto opacity-0 animate-fade-in-delay-4">
+          <p className="text-lg md:text-2xl block text-foreground/80 max-w-2xl mx-auto opacity-0 animate-fade-in-delay-4">
                   A passionate web developer crafting immersive experiences and intuitive digital interfaces.
           </p>
 
           <div className="pt-6 opacity-0 animate-fade-in-delay-5">
             <a
               href="#projects"
-              className="inline-block px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 via-teal-400 to-purple-500 text-white font-semibold shadow-xl hover:shadow-[0_0_25px_rgba(100,200,255,0.4)] transition duration-300"
+              aria-label="View my work"
+              className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-gradient-to-r from-sky-500 via-teal-500 to-violet-500 text-white font-semibold shadow-md ring-1 ring-black/10 dark:ring-white/10 transition-all duration-200 hover:brightness-110 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-95"
             >
-              🚀 View My Work
+              <span>View My Work</span>
             </a>
           </div>
         </div>

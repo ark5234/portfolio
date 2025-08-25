@@ -56,13 +56,16 @@ export const SkillsSection = () => {
               <div
                 key={category}
                 className={cn(
-                  "relative overflow-hidden rounded-3xl p-6 text-white shadow-md transition-all duration-500 group",
+                  "relative overflow-hidden rounded-3xl p-6 text-white shadow-md transition-all duration-500 group touch-manipulation cursor-pointer",
                   `bg-gradient-to-br ${combo}`,
-                  "hover:shadow-[0_0_40px_12px_rgba(255,165,0,0.6)]"
+                  "hover:shadow-[0_0_40px_12px_rgba(255,165,0,0.6)] focus-within:shadow-[0_0_40px_12px_rgba(255,165,0,0.6)] data-[pressed=true]:shadow-[0_0_40px_12px_rgba(255,165,0,0.6)]"
                 )}
+                onTouchStart={(e) => e.currentTarget.setAttribute('data-pressed', 'true')}
+                onTouchEnd={(e) => e.currentTarget.removeAttribute('data-pressed')}
+                onTouchCancel={(e) => e.currentTarget.removeAttribute('data-pressed')}
               >
                 {/* Orange Glow Ring on Hover */}
-                <div className="absolute inset-0 rounded-3xl pointer-events-none opacity-0 group-hover:opacity-100 transition-all duration-500 ring-2 ring-orange-400/30 blur-sm"></div>
+                <div className="absolute inset-0 rounded-3xl pointer-events-none opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 data-[pressed=true]:opacity-100 transition-all duration-500 ring-2 ring-orange-400/30 blur-sm"></div>
 
                 <div className="relative z-10">
                   <h3 className="text-xl font-bold mb-4 text-center uppercase tracking-widest drop-shadow">

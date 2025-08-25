@@ -20,12 +20,15 @@ export const ThemeToggle = () => {
   }, []);
 
   const toggleTheme = () => {
+    const root = document.documentElement;
+    root.classList.add("theme-animate");
+    window.setTimeout(() => root.classList.remove("theme-animate"), 260);
     if (isDarkMode) {
-      document.documentElement.classList.remove("dark");
+      root.classList.remove("dark");
       localStorage.setItem("theme", "light");
       setIsDarkMode(false);
     } else {
-      document.documentElement.classList.add("dark");
+      root.classList.add("dark");
       localStorage.setItem("theme", "dark");
       setIsDarkMode(true);
     }
@@ -35,7 +38,8 @@ export const ThemeToggle = () => {
     <button
       onClick={toggleTheme}
       aria-label="Toggle Theme"
-      className="ml-4 p-2 rounded-full bg-background/80 backdrop-blur-md shadow ring-1 ring-white/20 hover:ring-orange-400 transition"
+  aria-pressed={isDarkMode}
+  className="ml-4 p-2 rounded-full bg-background/80 backdrop-blur-md shadow ring-1 ring-black/10 dark:ring-white/10 hover:ring-orange-400 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-95"
     >
       {isDarkMode ? (
         <Sun className="h-5 w-5 text-yellow-400 transition-transform hover:rotate-180" />

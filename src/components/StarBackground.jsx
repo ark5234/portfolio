@@ -60,7 +60,7 @@ export const StarBackground = () => {
       {stars.map((star) => (
         <div
           key={star.id}
-          className="absolute rounded-full bg-white twinkle"
+          className="star"
           style={{
             left: star.x + "%",
             top: star.y + "%",
@@ -81,7 +81,7 @@ export const StarBackground = () => {
             top: meteor.y + "%",
             width: meteor.size * 50 + "px",
             height: meteor.size * 2 + "px",
-            animationDelay: meteor.delays,
+            animationDelay: meteor.delay + "s",
             animationDuration: meteor.animationDuration + "s",
           }}
         />
