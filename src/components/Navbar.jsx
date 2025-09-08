@@ -108,62 +108,52 @@ export const Navbar = () => {
 
 
   return (
-    <nav
-      className={cn(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-transparent nav-shadow",
-        isScrolled
-          ? "nav-blur py-3 border-white/20 dark:border-white/5"
-          : "bg-transparent py-5"
-      )}
-    >
-      <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Logo */}
-        <a href="#hero" className="flex items-center gap-3 font-extrabold text-2xl group relative select-none">
-          <span className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-pink-500 flex items-center justify-center shadow-lg transition-transform group-hover:scale-110">
-            <span className="text-white text-lg font-bold drop-shadow">V</span>
+    <nav className="fixed top-3 left-1/2 -translate-x-1/2 z-50 w-full pointer-events-none px-4 md:px-6">
+      {/* Dynamic Island Shell */}
+      <div className={cn(
+        "mx-auto flex items-center justify-between gap-6 transition-all duration-500 pointer-events-auto",
+        "rounded-3xl shadow-[0_4px_28px_-8px_rgba(0,0,0,0.25),0_0_0_1px_rgba(255,255,255,0.35)] backdrop-blur-xl",
+        "px-5 md:px-8",
+        isScrolled ? "h-16 md:h-20 w-[min(1100px,92%)] bg-white/70 dark:bg-black/30" : "h-20 md:h-24 w-[min(1200px,95%)] bg-white/60 dark:bg-black/25"
+      )}>
+        {/* Left Cluster (Logo) */}
+        <a href="#hero" className="flex items-center gap-3 font-extrabold text-2xl md:text-3xl group relative select-none tracking-tight">
+          <span className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-pink-500 flex items-center justify-center shadow-lg transition-transform group-hover:scale-110">
+            <span className="text-white text-xl md:text-2xl font-bold drop-shadow">V</span>
           </span>
           <span className={cn(
             "tracking-wide relative z-10 transition-colors duration-300",
-            (!isDarkMode && !isScrolled) ? "text-white group-hover:text-orange-300" : "text-foreground group-hover:text-orange-400"
+            !isDarkMode ? "text-slate-800 group-hover:text-orange-600" : "text-foreground group-hover:text-orange-400"
           )}>
-            <span className="font-extrabold">VIKRANT</span><span className={cn("ml-1 font-semibold", (!isDarkMode && !isScrolled) ? "text-white/70" : "text-foreground/60")}>Portfolio</span>
+            <span className="font-extrabold">VIKRANT</span><span className={cn("ml-1 font-semibold hidden sm:inline", !isDarkMode ? "text-slate-600" : "text-foreground/60")}>Portfolio</span>
           </span>
         </a>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-6 text-lg">
-          {navItems.map((item) => {
+        {/* Center Nav (desktop) */}
+        <div className="hidden md:flex items-center gap-7 text-base lg:text-lg">
+          {navItems.map(item => {
             const id = item.href.replace('#','');
             const isActive = active === id;
-            const lightOnDark = !isDarkMode && !isScrolled;
             return (
-              <a
-                key={item.name}
-                href={item.href}
-                className={cn(
-                  "nav-link text-sm tracking-wide transition-colors duration-300",
-                  lightOnDark && !isActive && "text-white/85 hover:text-orange-200",
-                  lightOnDark && isActive && "active text-orange-300",
-                  !lightOnDark && (isActive ? "active" : "text-foreground/70 hover:text-orange-400")
-                )}
-              >
-                {item.name}
-              </a>
+              <a key={item.name} href={item.href} className={cn(
+                "relative font-semibold tracking-wide transition-colors duration-300 px-1",
+                isActive
+                  ? (!isDarkMode ? "text-orange-600" : "text-orange-300")
+                  : (!isDarkMode ? "text-slate-700 hover:text-orange-600" : "text-foreground/70 hover:text-orange-400")
+              )}>{item.name}</a>
             );
           })}
-          
-          <ThemeToggle />
         </div>
 
-        {/* Mobile Menu Toggle */}
-        <button
-          onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="md:hidden text-foreground z-50 p-2 active:scale-95 transition-transform"
-          aria-expanded={isMenuOpen}
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* Right cluster */}
+        <div className="flex items-center gap-3 md:gap-4">
+          <div className="hidden md:block"><ThemeToggle /></div>
+          <button
+            onClick={() => setIsMenuOpen(p=>!p)}
+            className="md:hidden p-2 rounded-xl bg-white/50 dark:bg-white/10 backdrop-blur-md shadow hover:scale-105 active:scale-95 transition"
+            aria-label={isMenuOpen?"Close menu":"Open menu"}
+          >{isMenuOpen ? <X size={22}/> : <Menu size={22}/>}</button>
+        </div>
       </div>
 
       {/* Mobile Nav */}
@@ -176,28 +166,29 @@ export const Navbar = () => {
             : "opacity-0 scale-95 pointer-events-none"
         )}
       >
-        <div className="flex flex-col items-center gap-10 text-2xl">
+  <div className="flex flex-col items-center gap-10 text-3xl">
           {navItems.map((item) => {
             const id = item.href.replace('#','');
             const isActive = active === id;
-            const lightOnDark = !isDarkMode && !isScrolled;
             return (
               <a
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsMenuOpen(false)}
                 className={cn(
-                  "text-foreground/80 hover:text-orange-400 active:opacity-70 active:translate-y-px transition duration-200 font-semibold",
-                  lightOnDark && "text-white/90 hover:text-orange-300",
-                  isActive && (lightOnDark ? "text-orange-300" : "text-orange-400")
+      "font-bold transition duration-200 active:opacity-70 active:translate-y-px",
+                  isActive
+                    ? (!isDarkMode ? "text-orange-600" : "text-orange-300")
+                    : (!isDarkMode
+                        ? "text-slate-700 hover:text-orange-600"
+                        : "text-foreground/80 hover:text-orange-400")
                 )}
               >
                 {item.name}
               </a>
             );
           })}
-   
-      <div className="active:scale-95 transition-transform"><ThemeToggle /></div>
+          <div className="active:scale-95 transition-transform"><ThemeToggle /></div>
         </div>
       </div>
     </nav>

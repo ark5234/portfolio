@@ -21,17 +21,15 @@ export const ThemeToggle = () => {
 
   const toggleTheme = () => {
     const root = document.documentElement;
-    root.classList.add("theme-animate");
-    window.setTimeout(() => root.classList.remove("theme-animate"), 260);
-    if (isDarkMode) {
-      root.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-      setIsDarkMode(false);
-    } else {
-      root.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-      setIsDarkMode(true);
-    }
+    // Instead of applying transitions to *all* descendants (expensive with many nodes),
+    // add a lighter-scoped class that only targets background / color on key containers.
+    root.classList.add("theme-swap");
+    // Use a shorter timeout for snappier feel.
+    window.setTimeout(() => root.classList.remove("theme-swap"), 180);
+    const nextDark = !isDarkMode;
+    root.classList.toggle("dark", nextDark);
+    localStorage.setItem("theme", nextDark ? "dark" : "light");
+    setIsDarkMode(nextDark);
   };
 
   return (

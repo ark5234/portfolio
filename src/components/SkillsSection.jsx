@@ -35,8 +35,9 @@ export const SkillsSection = () => {
   const categories = Object.keys(skills);
 
   return (
-  <section id="skills" className="section-bridge section-panel-bridge py-20 px-4 bg-transparent scroll-mt-32 panel-spacing">
-      <div className="section-panel max-w-6xl mx-auto px-9 py-16">
+  <section id="skills" className="py-20 px-4 bg-transparent scroll-mt-32 panel-spacing">
+      <div className="panel-glow-wrap section-panel-bridge max-w-6xl mx-auto">
+      <div className="section-panel max-w-6xl mx-auto px-9 py-16 relative z-10">
         <h2 className="panel-title text-4xl md:text-5xl text-center mb-16">
           My <span className="highlight">Skills</span>
         </h2>
@@ -80,7 +81,8 @@ export const SkillsSection = () => {
             );
           })}
         </div>
-      </div>
+  </div>
+  </div>
     </section>
   );
 };

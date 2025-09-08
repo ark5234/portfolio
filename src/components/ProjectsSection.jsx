@@ -179,12 +179,23 @@ const ProjectsSection = () => {
 		);
 
 		cards.forEach((card) => io.observe(card));
+
+		// Fallback: after 1s show any still hidden (e.g., unsupported browser)
+		setTimeout(() => {
+			cards.forEach(card => {
+				if (card.classList.contains('opacity-0')) {
+					card.classList.remove('opacity-0','translate-y-8');
+					card.classList.add('opacity-100','translate-y-0');
+				}
+			});
+		}, 1200);
 		return () => io.disconnect();
 	}, []);
 
 	return (
-		<section ref={sectionRef} id="projects" className="section-bridge section-panel-bridge py-20 px-4 bg-transparent scroll-mt-32 panel-spacing">
-			<div className="section-panel max-w-6xl mx-auto px-9 py-16">
+		<section ref={sectionRef} id="projects" className="py-20 px-4 bg-transparent scroll-mt-32 panel-spacing">
+			<div className="panel-glow-wrap section-panel-bridge max-w-6xl mx-auto">
+			<div className="section-panel max-w-6xl mx-auto px-9 py-16 relative z-10">
 				<h2 className="panel-title text-4xl md:text-5xl text-center mb-4">
 					My <span className="highlight">Projects</span>
 				</h2>
@@ -202,7 +213,7 @@ const ProjectsSection = () => {
 							<div
 								key={project.id}
 								data-reveal="project"
-								className="group relative overflow-hidden rounded-3xl text-white shadow-md transition-all duration-500 opacity-0 translate-y-8 touch-manipulation cursor-pointer hover:shadow-[0_0_40px_12px_rgba(255,165,0,0.6)] focus-within:shadow-[0_0_40px_12px_rgba(255,165,0,0.6)] data-[pressed=true]:shadow-[0_0_40px_12px_rgba(255,165,0,0.6)] hover:-translate-y-3 hover:scale-[1.025]"
+								className="group relative overflow-hidden rounded-3xl text-white shadow-md transition-all duration-500 touch-manipulation cursor-pointer hover:shadow-[0_0_40px_12px_rgba(255,165,0,0.6)] focus-within:shadow-[0_0_40px_12px_rgba(255,165,0,0.6)] data-[pressed=true]:shadow-[0_0_40px_12px_rgba(255,165,0,0.6)] hover:-translate-y-3 hover:scale-[1.025]"
 								onTouchStart={(e) => e.currentTarget.setAttribute('data-pressed', 'true')}
 								onTouchEnd={(e) => e.currentTarget.removeAttribute('data-pressed')}
 								onTouchCancel={(e) => e.currentTarget.removeAttribute('data-pressed')}
@@ -294,7 +305,7 @@ const ProjectsSection = () => {
 							<div
 								key={project.id}
 								data-reveal="project"
-								className="opacity-0 translate-y-8 group relative flex flex-col md:flex-row gap-5 bg-card border border-white/10 rounded-2xl p-5 md:items-start hover:border-orange-400/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_32px_-4px_rgba(255,165,0,0.35)]"
+								className="group relative flex flex-col md:flex-row gap-5 bg-card border border-white/10 rounded-2xl p-5 md:items-start hover:border-orange-400/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_32px_-4px_rgba(255,165,0,0.35)]"
 							>
 								<div className="flex-1 min-w-0">
 									<h4 className="text-lg font-semibold mb-3 text-foreground text-left">{project.name}</h4>
@@ -336,6 +347,7 @@ const ProjectsSection = () => {
 						<ArrowRight className="w-4 h-4" />
 					</a>
 				</div>
+			</div>
 			</div>
 		</section>
 	);

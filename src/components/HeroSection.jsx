@@ -6,9 +6,10 @@ export const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="hero-full-dark relative flex flex-col items-center justify-center px-4 overflow-hidden transition-colors duration-500 pt-40 pb-24 section-bridge scroll-mt-32"
+      className="hero-backdrop relative flex flex-col items-center justify-center px-4 overflow-hidden transition-colors duration-500 pt-40 pb-24 scroll-mt-32"
     >
-      <div className="section-panel max-w-6xl mx-auto w-full px-9 py-40 relative">
+      <div className="panel-glow-wrap section-panel-bridge max-w-6xl mx-auto w-full">
+      <div className="section-panel max-w-6xl mx-auto w-full px-9 py-40 relative z-10">
       {/* Subtle Background Glow or Stars */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/2 w-[600px] h-[600px] bg-gradient-radial from-purple-400/20 via-transparent to-transparent rounded-full blur-3xl transform -translate-x-1/2" />
@@ -37,6 +38,7 @@ export const HeroSection = () => {
         <span className="text-sm text-gray-600 dark:text-gray-400 mb-2">Scroll</span>
         <ArrowDown className="h-6 w-6 text-blue-500 dark:text-teal-400 animate-bounce" />
       </div>
+  </div>
   </div>
     </section>
   );

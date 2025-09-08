@@ -85,9 +85,10 @@ const TextAreaField = ({ id, label, placeholder }) => (
   return (
     <section
   id="contact"
-  className="section-bridge section-panel-bridge py-20 px-6 text-white relative z-10 scroll-mt-32 panel-spacing"
+  className="py-20 px-6 text-white relative z-10 scroll-mt-32 panel-spacing"
 >
-  <div className="section-panel container max-w-6xl mx-auto px-9 py-16 bg-gradient-to-br from-[#1e1e2f] via-[#2d2e4a] to-[#1b1c2b] dark:from-[#0f0f1f] dark:via-[#111125] dark:to-[#0a0a15]">
+  <div className="panel-glow-wrap section-panel-bridge max-w-6xl mx-auto">
+  <div className="section-panel container max-w-6xl mx-auto px-9 py-16 relative z-10 bg-gradient-to-br from-[#1e1e2f] via-[#2d2e4a] to-[#1b1c2b] dark:from-[#0f0f1f] dark:via-[#111125] dark:to-[#0a0a15]">
     <h2 className="panel-title text-4xl md:text-5xl font-extrabold text-center mb-6">
       Get <span className="highlight">In Touch</span>
     </h2>
@@ -182,6 +183,7 @@ const TextAreaField = ({ id, label, placeholder }) => (
         </button>
       </form>
     </div>
+  </div>
   </div>
 </section>
 

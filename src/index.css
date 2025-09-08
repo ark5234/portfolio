@@ -165,9 +165,9 @@
     overflow-x:hidden;
   }
 
-  /* Smooth theme flip helper: temporarily apply transitions to common props */
-  .theme-animate *, .theme-animate {
-    transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease, fill 220ms ease, stroke 220ms ease, box-shadow 220ms ease;
+  /* Smooth theme flip helper (old: .theme-animate animated every node) */
+  .theme-swap, .theme-swap body, .theme-swap .section-panel, .theme-swap .footer-panel, .theme-swap .nav-blur, .theme-swap .section-solid, .theme-swap .panel-glow-wrap {
+    transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -294,8 +294,8 @@
 
 /* Bridge gradient between panels */
 .section-panel-bridge { position:relative; }
-.section-panel-bridge::after { content:""; position:absolute; top:100%; left:50%; transform:translateX(-50%); width:min(1150px,calc(100% - 3rem)); height:120px; pointer-events:none; background:
-  linear-gradient(to bottom, rgba(12,15,23,0.70), rgba(12,15,23,0.40) 55%, rgba(12,15,23,0.08) 80%, transparent); filter:blur(14px); opacity:.85; }
+.section-panel-bridge::after { content:""; position:absolute; top:100%; left:50%; transform:translateX(-50%); width:min(1150px,calc(100% - 3rem)); height:160px; pointer-events:none; background:
+  linear-gradient(to bottom, rgba(12,15,23,0.72), rgba(12,15,23,0.42) 55%, rgba(12,15,23,0.10) 82%, transparent); filter:blur(16px); opacity:.9; }
 .dark .section-panel-bridge::after { background:linear-gradient(to bottom, rgba(5,8,12,0.85), rgba(5,8,12,0.55) 55%, rgba(5,8,12,0.18) 80%, transparent); }
 
 /* Panel section title for better light mode readability */
@@ -321,6 +321,10 @@
 .dark .footer-panel { background:linear-gradient(180deg,#070b11 0%, #0d141d 70%, #070b11 100%); border-top:1px solid rgba(255,255,255,0.06); }
 .dark .footer-panel::before { opacity:.28; }
 
+/* Force dark footer variant (applies even in light mode) */
+.footer-panel.footer-dark { background:linear-gradient(180deg,#070b11 0%, #0d141d 70%, #070b11 100%); border-top:1px solid rgba(255,255,255,0.06); }
+.footer-panel.footer-dark::before { opacity:.22; }
+
 /* Star brightness adjustments for modes */
 body:not(.dark) .star { opacity:.55 !important; box-shadow:0 0 8px 1px rgba(255,255,255,0.35); }
 body:not(.dark) .meteor { opacity:.75; }
@@ -337,7 +341,47 @@ body:not(.dark) .meteor { opacity:.75; }
 /* Hero full dark background */
 .hero-full-dark { background:linear-gradient(180deg,#05070c 0%,#0a0f17 60%,#05070c 100%); position:relative; }
 .dark .hero-full-dark { background:linear-gradient(180deg,#020305 0%,#05070c 60%,#020305 100%); }
+/* New lighter hero backdrop relying on star field */
+.hero-backdrop { position:relative; background:linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 40%, rgba(255,255,255,0) 80%); }
+.dark .hero-backdrop { background:linear-gradient(180deg, rgba(10,14,22,0.85) 0%, rgba(10,14,22,0.55) 55%, rgba(10,14,22,0.15) 85%, rgba(10,14,22,0) 100%); }
 
 /* Panel vertical spacing wrapper */
-.panel-spacing { margin-top:4rem; margin-bottom:4rem; }
-@media (min-width:1024px){ .panel-spacing { margin-top:5rem; margin-bottom:5rem; } }
+/* Tightened spacing so consecutive panels visually connect */
+.panel-spacing { margin-top:3.5rem; margin-bottom:3.5rem; }
+.panel-spacing + .panel-spacing { margin-top:1.25rem; }
+@media (min-width:1024px){
+  .panel-spacing { margin-top:4.5rem; margin-bottom:4.5rem; }
+  .panel-spacing + .panel-spacing { margin-top:2rem; }
+}
+
+/* Localized transparent halo wrapper giving only ~7px gap around panel */
+.panel-glow-wrap { position:relative; padding:22px; border-radius:60px; box-shadow:0 2px 28px -6px rgba(15,23,42,0.22),0 0 0 1px rgba(255,255,255,0.25),0 0 32px -8px rgba(255,168,60,0.40),0 0 42px -10px rgba(120,80,255,0.28), inset 0 0 0 1px rgba(0,0,0,0.05); background:
+  linear-gradient(140deg, rgba(255,255,255,0.72), rgba(255,255,255,0.58) 40%, rgba(255,255,255,0.42)); -webkit-backdrop-filter:blur(10px) saturate(140%); backdrop-filter:blur(10px) saturate(140%); }
+.dark .panel-glow-wrap { box-shadow:0 0 0 1px rgba(255,255,255,0.12),0 0 24px -6px rgba(255,168,60,0.55),0 0 42px -6px rgba(120,80,255,0.50),0 0 60px -12px rgba(0,0,0,0.6); }
+.panel-glow-wrap::before, .panel-glow-wrap::after { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; }
+/* Enhanced mixed glow (slightly stronger for visibility) */
+.panel-glow-wrap::before {
+  background:
+    radial-gradient(circle at 16% 18%, rgba(255,185,90,0.33), transparent 70%),
+    radial-gradient(circle at 86% 80%, rgba(130,170,255,0.30), transparent 65%),
+    linear-gradient(120deg, rgba(255,170,60,0.22), rgba(140,100,255,0.18) 50%, rgba(0,0,0,0) 80%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.18) 0 2px, rgba(255,255,255,0) 2px 11px);
+  mix-blend-mode:screen;
+  filter:blur(4px) saturate(135%);
+}
+.dark .panel-glow-wrap::before { filter:blur(5px) saturate(130%); background:
+    radial-gradient(circle at 14% 20%, rgba(255,185,90,0.40), transparent 70%),
+    radial-gradient(circle at 84% 78%, rgba(120,150,255,0.38), transparent 65%),
+    linear-gradient(115deg, rgba(255,165,50,0.28), rgba(140,100,255,0.22) 48%, rgba(0,0,0,0) 78%);
+}
+.panel-glow-wrap::after {
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,0.28), rgba(255,255,255,0) 170px),
+    linear-gradient(to top, rgba(255,255,255,0.18), rgba(255,255,255,0) 190px),
+    radial-gradient(circle at 50% 55%, rgba(255,255,255,0.18), transparent 70%);
+  opacity:.70;
+}
+.dark .panel-glow-wrap { background:transparent; -webkit-backdrop-filter:none; backdrop-filter:none; }
+.dark .panel-glow-wrap::after { opacity:.5; }
+
+/* Localized inner content glow so transparency wraps content not entire panel */

@@ -1,57 +1,61 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+
+// NOTE: Previous implementation could create 1500-2500+ individual DOM nodes on large screens
+// which slows initial page paint & theme transitions. This version:
+// 1. Reduces star density (area / 6500) with an upper cap.
+// 2. Debounces expensive regeneration on resize.
+// 3. Keeps meteors lightweight.
+// Further improvement (future): move to a <canvas> for near-zero layout cost.
 
 export const StarBackground = () => {
   const [stars, setStars] = useState([]);
   const [meteors, setMeteors] = useState([]);
+  const resizeTimer = useRef(null);
 
   useEffect(() => {
+    // initial generate
     generateStars();
     generateMeteors();
-
+    // Debounced resize handler
     const handleResize = () => {
-      generateStars();
-      generateMeteors();
-    }
-
+      if (resizeTimer.current) clearTimeout(resizeTimer.current);
+      resizeTimer.current = setTimeout(() => {
+        generateStars();
+        generateMeteors();
+      }, 180); // small delay to avoid thrashing during window drag
+    };
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
+      if (resizeTimer.current) clearTimeout(resizeTimer.current);
     };
   }, []);
 
   const generateStars = () => {
-    const numOfStars = Math.floor((window.innerWidth * window.innerHeight) / 1000);
-    const newStars = [];
-
-    for (let i = 0; i < numOfStars; i++) {
-      newStars.push({
-        id: i,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        size: Math.random() * 3 + 1,
-        opacity: Math.random() * 0.5 + 0.5,
-        animationDuration: Math.random() * 4 + 2,
-      });
-    }
-
+    const area = window.innerWidth * window.innerHeight;
+    // density divisor higher => fewer stars; clamp to a reasonable range
+    const target = Math.min(600, Math.max(160, Math.floor(area / 6500)));
+    const newStars = Array.from({ length: target }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 2.2 + 0.6, // smaller for less visual noise
+      opacity: Math.random() * 0.45 + 0.35,
+      animationDuration: Math.random() * 4 + 2,
+    }));
     setStars(newStars);
   };
 
   const generateMeteors = () => {
-    const numberOfMeteors = 4;
-    const newMeteors = [];
-
-    for (let i = 0; i < numberOfMeteors; i++) {
-      newMeteors.push({
-        id: i,
-        x: Math.random() * 100,
-        y: Math.random() * 20,
-        size: Math.random() * 2 + 1,
-        delay: Math.random() * 15,
-        animationDuration: Math.random() * 3 + 3,
-      });
-    }
-
+    const numberOfMeteors = 3; // slightly fewer
+    const newMeteors = Array.from({ length: numberOfMeteors }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 22,
+      size: Math.random() * 2 + 0.8,
+      delay: Math.random() * 14,
+      animationDuration: Math.random() * 3 + 3,
+    }));
     setMeteors(newMeteors);
   };
 
