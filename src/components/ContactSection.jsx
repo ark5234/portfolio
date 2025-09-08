@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Instagram,
   Linkedin,
@@ -85,22 +86,22 @@ const TextAreaField = ({ id, label, placeholder }) => (
   return (
     <section
   id="contact"
-  className="py-20 px-6 text-white relative z-10 scroll-mt-32 panel-spacing"
+  className="py-16 md:py-20 px-4 md:px-6 text-white relative z-10 scroll-mt-32 panel-spacing"
 >
   <div className="panel-glow-wrap section-panel-bridge max-w-6xl mx-auto">
-  <div className="section-panel container max-w-6xl mx-auto px-9 py-16 relative z-10 bg-gradient-to-br from-[#1e1e2f] via-[#2d2e4a] to-[#1b1c2b] dark:from-[#0f0f1f] dark:via-[#111125] dark:to-[#0a0a15]">
-    <h2 className="panel-title text-4xl md:text-5xl font-extrabold text-center mb-6">
+  <div className="section-panel container max-w-6xl mx-auto px-6 md:px-9 py-12 md:py-16 relative z-10 bg-gradient-to-br from-[#1e1e2f] via-[#2d2e4a] to-[#1b1c2b] dark:from-[#0f0f1f] dark:via-[#111125] dark:to-[#0a0a15]">
+    <h2 className="panel-title text-3xl md:text-5xl font-extrabold text-center mb-5 md:mb-6">
       Get <span className="highlight">In Touch</span>
     </h2>
-    <p className="text-center text-gray-300 max-w-2xl mx-auto mb-12">
+    <p className="text-center text-gray-300 max-w-2xl mx-auto mb-10 md:mb-12 text-sm md:text-base leading-relaxed">
       Have a project in mind or want to collaborate? Feel free to reach out.
       I'm always open to new ideas, opportunities, and creative discussions.
     </p>
 
-    <div className="grid md:grid-cols-2 gap-12">
+    <div className="grid md:grid-cols-2 gap-10 md:gap-12 items-start">
       {/* Contact Info */}
-      <div className="space-y-10">
-        <div className="space-y-6">
+      <div className="space-y-8 md:space-y-10 max-w-sm md:max-w-none mx-auto">
+        <div className="space-y-5 md:space-y-6">
               <ContactItem
                   icon={<Mail />}
                   title="Email"
@@ -123,12 +124,12 @@ const TextAreaField = ({ id, label, placeholder }) => (
           
 
         <div className="flex items-start space-x-4">
-  <div className="p-3 rounded-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 shadow-md">
-    <Send className="text-white" />
+  <div className="p-2.5 md:p-3 rounded-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 shadow-md">
+    <Send className="text-white w-5 h-5 md:w-6 md:h-6" />
   </div>
   <div>
-    <h4 className="font-semibold text-white mb-2">Connect with me</h4>
-    <div className="flex items-center space-x-4">
+    <h4 className="font-semibold text-white mb-2 text-sm md:text-base">Connect with me</h4>
+    <div className="flex items-center space-x-3 md:space-x-4">
       {[
         {
           href: "https://linkedin.com/in/vikrant-kawadkar-0b9073251",
@@ -152,10 +153,10 @@ const TextAreaField = ({ id, label, placeholder }) => (
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-gray-300 hover:text-teal-300 transition duration-300 transform hover:scale-110"
+          className="text-gray-300 hover:text-teal-300 transition duration-300 transform hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded-full"
         >
-          <div className="p-2 bg-[#1e1e2f] dark:bg-[#1c1c2c] rounded-full">
-            {icon}
+          <div className="p-2 bg-[#1e1e2f] dark:bg-[#1c1c2c] rounded-full flex items-center justify-center">
+            {React.cloneElement(icon, { className: 'w-4 h-4 md:w-5 md:h-5' })}
           </div>
         </a>
       ))}
@@ -167,9 +168,9 @@ const TextAreaField = ({ id, label, placeholder }) => (
       {/* Contact Form */}
       <form
         onSubmit={handleSubmit}
-        className="bg-[#1c1c2c] rounded-3xl p-8 shadow-lg ring-1 ring-white/10"
+        className="bg-[#1c1c2c] rounded-3xl p-6 md:p-8 shadow-lg ring-1 ring-white/10 max-w-md md:max-w-full mx-auto"
       >
-        <h3 className="text-2xl font-bold mb-6 text-teal-300">Send a Message</h3>
+        <h3 className="text-xl md:text-2xl font-bold mb-5 md:mb-6 text-teal-300">Send a Message</h3>
         <InputField id="name" label="Your Name" placeholder="Enter your name..." />
         <InputField id="email" label="Your Email" type="email" placeholder="you@example.com" />
         <TextAreaField id="message" label="Your Message" placeholder="What's on your mind?" />

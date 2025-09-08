@@ -193,19 +193,19 @@ const ProjectsSection = () => {
 	}, []);
 
 	return (
-		<section ref={sectionRef} id="projects" className="py-20 px-4 bg-transparent scroll-mt-32 panel-spacing">
+		<section ref={sectionRef} id="projects" className="py-16 md:py-20 px-3 md:px-4 bg-transparent scroll-mt-32 panel-spacing">
 			<div className="panel-glow-wrap section-panel-bridge max-w-6xl mx-auto">
-			<div className="section-panel max-w-6xl mx-auto px-9 py-16 relative z-10">
-				<h2 className="panel-title text-4xl md:text-5xl text-center mb-4">
+			<div className="section-panel max-w-6xl mx-auto px-5 md:px-9 py-12 md:py-16 relative z-10">
+				<h2 className="panel-title text-3xl md:text-5xl text-center mb-4">
 					My <span className="highlight">Projects</span>
 				</h2>
-				<p className="text-center text-foreground/70 max-w-2xl mx-auto mb-12">
+				<p className="text-center text-foreground/70 max-w-2xl mx-auto mb-10 md:mb-12 text-sm md:text-base">
 					A curated selection of my most impactful work, demonstrating my full-stack
 					capabilities and product thinking.
 				</p>
 
 				{/* Top 3 Featured Projects with Images */}
-				<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
+				<div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3 mb-14 md:mb-16">
 					{topProjects.map((project, index) => {
 						const combo = gradientCombos[index % gradientCombos.length];
             
@@ -226,7 +226,7 @@ const ProjectsSection = () => {
 
 								<div className="relative z-10">
 									{/* Project Image */}
-									<div className="h-56 overflow-hidden bg-black/20">
+									<div className="h-48 md:h-56 overflow-hidden bg-black/20">
 										{project.imageUrl ? (
 											<img 
 												src={project.imageUrl} 
@@ -257,7 +257,7 @@ const ProjectsSection = () => {
 											</div>
 										</div>
                     
-										<p className="text-sm mb-5 text-white/90 leading-relaxed text-justify">
+										<p className="text-sm md:text-sm mb-5 text-white/90 leading-relaxed text-left md:text-justify">
 											{sanitize(project.description)}
 										</p>
 
@@ -296,8 +296,8 @@ const ProjectsSection = () => {
 				</div>
 
 				{/* Remaining Projects - Vertical stacked (horizontal cards) */}
-				<div className="mb-12">
-					<h3 className="panel-title text-2xl font-bold text-center mb-8">
+				<div className="mb-10 md:mb-12">
+					<h3 className="panel-title text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8">
 						More <span className="highlight">Projects</span>
 					</h3>
 						<div className="flex flex-col gap-5">

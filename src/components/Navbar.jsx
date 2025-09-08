@@ -146,12 +146,14 @@ export const Navbar = () => {
         </div>
 
         {/* Right cluster */}
-        <div className="flex items-center gap-3 md:gap-4">
-          <div className="hidden md:block"><ThemeToggle /></div>
+        <div className="flex items-center gap-2 md:gap-4">
+          {/* Theme toggle now also visible on mobile */}
+          <div className="block"><ThemeToggle /></div>
           <button
             onClick={() => setIsMenuOpen(p=>!p)}
             className="md:hidden p-2 rounded-xl bg-white/50 dark:bg-white/10 backdrop-blur-md shadow hover:scale-105 active:scale-95 transition"
             aria-label={isMenuOpen?"Close menu":"Open menu"}
+            aria-expanded={isMenuOpen}
           >{isMenuOpen ? <X size={22}/> : <Menu size={22}/>}</button>
         </div>
       </div>

@@ -2,24 +2,24 @@ import { Briefcase, Code, User, BookOpen, Award, Layers } from "lucide-react";
 
 export const AboutSection = () => {
   return (
-  <section id="about" className="py-24 px-4 relative scroll-mt-32 panel-spacing">
+  <section id="about" className="py-20 md:py-24 px-3 md:px-4 relative scroll-mt-32 panel-spacing">
       {/* Localized 7px transparent glow wrapper around the panel */}
       <div className="panel-glow-wrap section-panel-bridge max-w-6xl mx-auto">
-      <div className="section-panel container max-w-6xl mx-auto px-9 py-16 relative z-10">
+  <div className="section-panel container max-w-6xl mx-auto px-5 md:px-9 py-12 md:py-16 relative z-10">
         <h2 className="panel-title text-3xl md:text-4xl text-center mb-12">
           About <span className="highlight">Me</span>
         </h2>
 
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 bg-gradient-to-br from-[#1A2980] via-[#114a83] to-[#2b5876] dark:bg-transparent p-6 rounded-3xl shadow-xl">
+  <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-8 bg-gradient-to-br from-[#1A2980] via-[#114a83] to-[#2b5876] dark:bg-transparent p-5 md:p-6 rounded-3xl shadow-xl">
           {/* Left: About / Summary */}
-          <div className="space-y-6 text-justify">
+          <div className="space-y-6 text-left md:text-justify">
             <h3 className="text-2xl font-semibold text-white dark:text-white leading-snug">
               Hi, I'm <span className="text-orange-300">Vikrant Kawadkar</span> — a full‑stack developer & AI enthusiast building scalable, data‑driven products.
             </h3>
-            <p className="text-base md:text-lg leading-relaxed text-white/90">
+            <p className="text-sm md:text-lg leading-relaxed text-white/90">
               I enjoy solving end‑to‑end problems: architecting resilient backends, crafting performant UIs, and shipping ML features that create measurable impact. Recently I've engineered real‑time MERN systems, production ML pipelines, and cloud‑native developer tools serving thousands of requests per minute.
             </p>
-            <p className="text-base md:text-lg leading-relaxed text-white/80">
+            <p className="text-sm md:text-lg leading-relaxed text-white/80">
               My focus areas include full‑stack web (React • Node • Mongo/Postgres), ML platforms (TensorFlow, PyTorch, FastAPI), and cloud deployment (Docker, Kubernetes, Azure, HuggingFace). I iterate fast, profile early, and care about user experience, accessibility, and maintainable code.
             </p>
             <div className="flex flex-wrap gap-4 pt-4">
