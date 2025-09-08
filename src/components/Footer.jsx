@@ -1,25 +1,20 @@
 export const Footer = () => {
-    return (
-        <footer className="py-5 px-4 
-        bg-card relative 
-        border-t border-[#44475a]
-        mt-5 pt-8 
-        flex flex-wrap 
-        justify-center items-center
-        text-center
-        "
-        >
-
-       <p className="text-sm md:text-base tracking-wide">
-          <span className="text-[#ffb86c] font-semibold">
-            &copy; {new Date().getFullYear()}
-          </span>{" "}
-          <span className="text-[#93abf9] font-semibold hover:text-[#7a4ea5] transition-colors duration-300">
-            Vikrant Kawadkar
-          </span>.{" "}
-          <span className="text-[#58c89d] font-medium">All rights reserved.</span>
+  return (
+    <footer className="footer-panel mt-10 relative px-6 md:px-8 py-10 text-center overflow-hidden section-bridge">
+      <div className="max-w-5xl mx-auto flex flex-col gap-4">
+        <p className="text-sm md:text-base tracking-wide text-foreground/80 dark:text-foreground/70">
+          <span className="footer-accent">&copy; {new Date().getFullYear()}</span>{' '}
+          <span className="footer-owner">Vikrant Kawadkar</span>.{' '}
+          <span className="footer-rights font-medium">All rights reserved.</span>
         </p>
-            
-        </footer>
-    );
-}
+        <div className="flex flex-wrap justify-center gap-4 text-xs md:text-sm text-foreground/60 dark:text-foreground/50">
+          <span>Crafted with React & Tailwind</span>
+          <span className="hidden sm:inline">•</span>
+          <span>Theme aware design</span>
+          <span className="hidden sm:inline">•</span>
+          <span>Deployed on modern edge platforms</span>
+        </div>
+      </div>
+    </footer>
+  );
+};

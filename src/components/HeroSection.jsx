@@ -6,8 +6,9 @@ export const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden bg-background dark:bg-transparent transition-colors duration-500"
+      className="hero-full-dark relative flex flex-col items-center justify-center px-4 overflow-hidden transition-colors duration-500 pt-40 pb-24 section-bridge scroll-mt-32"
     >
+      <div className="section-panel max-w-6xl mx-auto w-full px-9 py-40 relative">
       {/* Subtle Background Glow or Stars */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/2 w-[600px] h-[600px] bg-gradient-radial from-purple-400/20 via-transparent to-transparent rounded-full blur-3xl transform -translate-x-1/2" />
@@ -15,39 +16,28 @@ export const HeroSection = () => {
       </div>
 
       {/* Hero Content */}
-      <div className="container max-w-4xl mx-auto text-center z-10 min-h-screen flex flex-col justify-center">
+      <div className="relative z-10 max-w-4xl mx-auto text-center flex flex-col justify-center">
         <div className="space-y-6">
           <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
-            <span className="block text-foreground opacity-0 animate-fade-in-delay-1">
+            <span className="block opacity-0 animate-fade-in-delay-1 text-white drop-shadow-md">
                   Hello, I'm
             </span>
-
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-teal-500 via-blue-500 to-purple-600 dark:from-teal-400 dark:via-blue-400 dark:to-purple-500 animate-gradient-slow opacity-0 animate-fade-in-delay-2">
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-blue-500 to-purple-600 dark:from-teal-400 dark:via-blue-400 dark:to-purple-500 animate-gradient-slow opacity-0 animate-fade-in-delay-2 drop-shadow">
               Vikrant Kawadkar
             </span>
           </h1>
-
-          <p className="text-lg md:text-2xl block text-foreground/80 max-w-2xl mx-auto opacity-0 animate-fade-in-delay-4">
+          <p className="text-lg md:text-2xl block max-w-2xl mx-auto opacity-0 animate-fade-in-delay-4 text-white/80">
                   A passionate web developer crafting immersive experiences and intuitive digital interfaces.
           </p>
-
-          <div className="pt-6 opacity-0 animate-fade-in-delay-5">
-            <a
-              href="#projects"
-              aria-label="View my work"
-              className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-gradient-to-r from-sky-500 via-teal-500 to-violet-500 text-white font-semibold shadow-md ring-1 ring-black/10 dark:ring-white/10 transition-all duration-200 hover:brightness-110 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-95"
-            >
-              <span>View My Work</span>
-            </a>
-          </div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-fade-in-delay-6">
+  <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-fade-in-delay-6">
         <span className="text-sm text-gray-600 dark:text-gray-400 mb-2">Scroll</span>
         <ArrowDown className="h-6 w-6 text-blue-500 dark:text-teal-400 animate-bounce" />
       </div>
+  </div>
     </section>
   );
 };

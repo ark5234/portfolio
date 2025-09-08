@@ -85,11 +85,11 @@ const TextAreaField = ({ id, label, placeholder }) => (
   return (
     <section
   id="contact"
-  className="py-20 px-6 bg-gradient-to-br from-[#1e1e2f] via-[#2d2e4a] to-[#1b1c2b] dark:from-[#0f0f1f] dark:via-[#111125] dark:to-[#0a0a15] text-white relative z-10"
+  className="section-bridge section-panel-bridge py-20 px-6 text-white relative z-10 scroll-mt-32 panel-spacing"
 >
-  <div className="container max-w-6xl mx-auto">
-    <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-6 bg-gradient-to-r from-teal-400 via-blue-500 to-purple-500 text-transparent bg-clip-text">
-      Get In Touch
+  <div className="section-panel container max-w-6xl mx-auto px-9 py-16 bg-gradient-to-br from-[#1e1e2f] via-[#2d2e4a] to-[#1b1c2b] dark:from-[#0f0f1f] dark:via-[#111125] dark:to-[#0a0a15]">
+    <h2 className="panel-title text-4xl md:text-5xl font-extrabold text-center mb-6">
+      Get <span className="highlight">In Touch</span>
     </h2>
     <p className="text-center text-gray-300 max-w-2xl mx-auto mb-12">
       Have a project in mind or want to collaborate? Feel free to reach out.

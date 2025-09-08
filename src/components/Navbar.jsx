@@ -13,6 +13,18 @@ const navItems = [
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [active, setActive] = useState("hero");
+  const [isDarkMode, setIsDarkMode] = useState(() => document.documentElement.classList.contains('dark'));
+  // Watch for theme changes (MutationObserver catches class toggles from ThemeToggle)
+  useEffect(() => {
+    const root = document.documentElement;
+    const update = () => setIsDarkMode(root.classList.contains('dark'));
+    update();
+    const observer = new MutationObserver(update);
+    observer.observe(root, { attributes: true, attributeFilter: ['class'] });
+    window.addEventListener('storage', update);
+    return () => { observer.disconnect(); window.removeEventListener('storage', update); };
+  }, []);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const overlayRef = useRef(null);
   const startYRef = useRef(null);
@@ -22,6 +34,22 @@ export const Navbar = () => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Active section observer
+  useEffect(() => {
+    const ids = navItems.map(i => i.href.replace('#',''));
+    const sections = ids.map(id => document.getElementById(id)).filter(Boolean);
+    if(!sections.length) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          setActive(entry.target.id);
+        }
+      });
+    }, { rootMargin: "-40% 0px -50% 0px", threshold:[0,0.25,0.5,0.75,1]});
+    sections.forEach(sec => io.observe(sec));
+    return () => io.disconnect();
   }, []);
 
   // Robust body scroll lock (iOS-safe) when mobile menu is open
@@ -82,34 +110,47 @@ export const Navbar = () => {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-300",
+        "fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-transparent nav-shadow",
         isScrolled
-          ? "bg-background/70 shadow-xl backdrop-blur-xl py-3"
+          ? "nav-blur py-3 border-white/20 dark:border-white/5"
           : "bg-transparent py-5"
       )}
     >
       <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <a href="#hero" className="flex items-center gap-3 font-extrabold text-2xl text-primary group relative">
+        <a href="#hero" className="flex items-center gap-3 font-extrabold text-2xl group relative select-none">
           <span className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-pink-500 flex items-center justify-center shadow-lg transition-transform group-hover:scale-110">
-            <span className="text-white text-lg font-bold">V</span>
+            <span className="text-white text-lg font-bold drop-shadow">V</span>
           </span>
-          <span className="text-foreground tracking-wide relative z-10 group-hover:text-orange-400 transition-colors duration-300">
-            VIKRANT<span className="text-muted ml-1">Portfolio</span>
+          <span className={cn(
+            "tracking-wide relative z-10 transition-colors duration-300",
+            (!isDarkMode && !isScrolled) ? "text-white group-hover:text-orange-300" : "text-foreground group-hover:text-orange-400"
+          )}>
+            <span className="font-extrabold">VIKRANT</span><span className={cn("ml-1 font-semibold", (!isDarkMode && !isScrolled) ? "text-white/70" : "text-foreground/60")}>Portfolio</span>
           </span>
         </a>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-6 text-lg">
-          {navItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="relative text-foreground/80 hover:text-orange-400 transition duration-300 font-medium"
-            >
-              {item.name}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            const id = item.href.replace('#','');
+            const isActive = active === id;
+            const lightOnDark = !isDarkMode && !isScrolled;
+            return (
+              <a
+                key={item.name}
+                href={item.href}
+                className={cn(
+                  "nav-link text-sm tracking-wide transition-colors duration-300",
+                  lightOnDark && !isActive && "text-white/85 hover:text-orange-200",
+                  lightOnDark && isActive && "active text-orange-300",
+                  !lightOnDark && (isActive ? "active" : "text-foreground/70 hover:text-orange-400")
+                )}
+              >
+                {item.name}
+              </a>
+            );
+          })}
           
           <ThemeToggle />
         </div>
@@ -136,16 +177,25 @@ export const Navbar = () => {
         )}
       >
         <div className="flex flex-col items-center gap-10 text-2xl">
-          {navItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              onClick={() => setIsMenuOpen(false)}
-      className="text-foreground/80 hover:text-orange-400 active:opacity-70 active:translate-y-px transition duration-200 font-semibold"
-            >
-              {item.name}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            const id = item.href.replace('#','');
+            const isActive = active === id;
+            const lightOnDark = !isDarkMode && !isScrolled;
+            return (
+              <a
+                key={item.name}
+                href={item.href}
+                onClick={() => setIsMenuOpen(false)}
+                className={cn(
+                  "text-foreground/80 hover:text-orange-400 active:opacity-70 active:translate-y-px transition duration-200 font-semibold",
+                  lightOnDark && "text-white/90 hover:text-orange-300",
+                  isActive && (lightOnDark ? "text-orange-300" : "text-orange-400")
+                )}
+              >
+                {item.name}
+              </a>
+            );
+          })}
    
       <div className="active:scale-95 transition-transform"><ThemeToggle /></div>
         </div>

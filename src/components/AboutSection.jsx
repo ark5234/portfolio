@@ -2,10 +2,10 @@ import { Briefcase, Code, User } from "lucide-react";
 
 export const AboutSection = () => {
   return (
-    <section id="about" className="py-24 px-4 relative">
-      <div className="container max-w-5xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-          About <span className="text-orange-400">Me</span>
+  <section id="about" className="section-bridge section-panel-bridge py-24 px-4 relative scroll-mt-32 panel-spacing">
+      <div className="section-panel container max-w-6xl mx-auto px-9 py-16">
+        <h2 className="panel-title text-3xl md:text-4xl text-center mb-12">
+          About <span className="highlight">Me</span>
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-gradient-to-br from-[#1A2980] via-[#114a83] to-[#2b5876] dark:bg-transparent p-6 rounded-3xl shadow-xl">
@@ -51,9 +51,9 @@ export const AboutSection = () => {
   <div className="p-6 rounded-3xl 
                 bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 
                 shadow-xl 
-                transition-transform-shadow duration-300 
+                transition-all duration-300 will-change-transform
                 hover:shadow-[0_0_25px_8px_rgba(99,102,241,0.7)]
-                hover:scale-[1.03]
+                hover:-translate-y-2 hover:scale-[1.03]
                 relative overflow-hidden group">
     <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-lg rounded-3xl z-0"></div>
     <div className="relative z-10 flex items-start gap-4">
@@ -73,9 +73,9 @@ export const AboutSection = () => {
   <div className="p-6 rounded-3xl 
                 bg-gradient-to-br from-orange-400 via-pink-500 to-red-500 
                 shadow-xl 
-                transition-transform-shadow duration-300 
+                transition-all duration-300 will-change-transform
                 hover:shadow-[0_0_25px_8px_rgba(99,102,241,0.7)]
-                hover:scale-[1.03]
+                hover:-translate-y-2 hover:scale-[1.03]
                 relative overflow-hidden group">
     <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-lg rounded-3xl z-0"></div>
     <div className="relative z-10 flex items-start gap-4">
@@ -95,9 +95,9 @@ export const AboutSection = () => {
   <div className="p-6 rounded-3xl 
                 bg-gradient-to-br from-teal-400 via-green-400 to-emerald-500
                 shadow-xl 
-                transition-transform-shadow duration-300 
+                transition-all duration-300 will-change-transform
                 hover:shadow-[0_0_25px_8px_rgba(99,102,241,0.7)]
-                hover:scale-[1.03]
+                hover:-translate-y-2 hover:scale-[1.03]
                 relative overflow-hidden group">
     <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-lg rounded-3xl z-0"></div>
     <div className="relative z-10 flex items-start gap-4">

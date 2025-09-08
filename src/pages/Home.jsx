@@ -4,7 +4,7 @@ import { Navbar } from "../components/Navbar";
 import { HeroSection } from "../components/HeroSection";
 import { AboutSection } from "../components/AboutSection";
 import { SkillsSection } from "../components/SkillsSection";
-import { ProjectsSection } from "../components/ProjectsSection";
+import ProjectsSection from "../components/ProjectsSection";
 import { ContactSection } from "../components/ContactSection";
 import { Footer } from "../components/Footer";
 import { BackToTop } from "../components/BackToTop";
@@ -24,7 +24,7 @@ export const Home = () => {
         <Navbar />
 
         {/* Main Section */}
-        <main>
+    <main className="space-y-0">{/* spacing handled inside sections */}
             <HeroSection />
             <AboutSection />
             <ProjectsSection />
