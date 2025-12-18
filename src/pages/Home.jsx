@@ -1,10 +1,10 @@
-import { ThemeToggle } from "../components/ThemeToggel";
-import { StarBackground } from "../components/StarBackground";
+import { ThemeToggle } from "../components/ThemeToggle";
+import { AuroraBackground } from "../components/AuroraBackground";
 import { Navbar } from "../components/Navbar";
 import { HeroSection } from "../components/HeroSection";
 import { AboutSection } from "../components/AboutSection";
 import { SkillsSection } from "../components/SkillsSection";
-import ProjectsSection from "../components/ProjectsSection";
+import { ProjectsSection } from "../components/ProjectsSection";
 import { ContactSection } from "../components/ContactSection";
 import { Footer } from "../components/Footer";
 import { BackToTop } from "../components/BackToTop";
@@ -12,13 +12,13 @@ import { BackToTop } from "../components/BackToTop";
 
 
 export const Home = () => {
-    return <div className="min-h-screen bg-background text-foreground overflow-x-hidden"> 
+    return <div className="min-h-screen text-foreground overflow-x-hidden"> 
         
         {/* Theme Toggle */}
         
 
         {/* Background Effect */}
-        <StarBackground />
+        <AuroraBackground />
 
         {/* Navbar */}
         <Navbar />
