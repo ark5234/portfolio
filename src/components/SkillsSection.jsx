@@ -1,88 +1,87 @@
-import { cn } from "@/lib/utils";
+﻿import { motion } from "framer-motion";
+import { Code2, Database, Layout, Server, Terminal, Cpu } from "lucide-react";
 
-const gradientCombos = [
-  "from-blue-500 via-indigo-500 to-purple-600",
-  "from-orange-400 via-pink-500 to-red-500", 
-  "from-teal-400 via-green-400 to-emerald-500",
-  "from-purple-500 via-fuchsia-500 to-rose-400",
-  "from-cyan-400 via-sky-500 to-blue-600",
-  "from-yellow-400 via-orange-500 to-pink-500",
+const skills = [
+  {
+    category: "Frontend",
+    icon: Layout,
+    items: ["JavaScript", "TypeScript", "React", "Next.js", "HTML", "CSS", "Tailwind CSS", "Vite"]
+  },
+  {
+    category: "Backend",
+    icon: Server,
+    items: ["Node.js", "Express.js", "FastAPI", "MongoDB", "MySQL", "PostgreSQL", "Redis", "REST API"]
+  },
+  {
+    category: "DevOps",
+    icon: Terminal,
+    items: ["Docker", "Kubernetes", "Azure", "AWS", "Vercel", "Render"]
+  },
+  {
+    category: "AI/ML",
+    icon: Cpu,
+    items: ["Python", "TensorFlow", "PyTorch", "Scikit-learn", "Pandas", "NumPy", "NLP"]
+  },
+  {
+    category: "Data",
+    icon: Database,
+    items: ["Power BI", "DAX", "Data Visualization", "Data Analysis", "KPI Dashboards"]
+  },
+  {
+    category: "Tools",
+    icon: Code2,
+    items: ["Git", "GitHub", "VS Code", "Figma", "Postman"]
+  }
 ];
 
-// Skills data matching the user's image exactly
-const skills = {
-  "Frontend": [
-    "JavaScript", "TypeScript", "React", "Next.js", "HTML", "CSS", "Tailwind CSS", "Vite"
-  ],
-  "Backend": [
-    "Node.js", "Express.js", "FastAPI", "MongoDB", "MySQL", "PostgreSQL", "Redis", "REST API", "JWT", "WebSockets"
-  ],
-  "DevOps": [
-    "Docker", "Kubernetes", "Azure", "AWS", "Vercel", "Render"
-  ],
-  "AI/ML": [
-    "Python", "TensorFlow", "PyTorch", "Scikit-learn", "Pandas", "NumPy", "Machine Learning", "Deep Learning", "NLP"
-  ],
-  "Data / Analytics": [
-    "Power BI", "DAX", "Data Visualization", "Data Analysis", "KPI Dashboards"
-  ],
-  "Tools": [
-    "Git", "GitHub", "VS Code", "Figma", "Postman"
-  ]
-};
-
 export const SkillsSection = () => {
-  const categories = Object.keys(skills);
-
   return (
-  <section id="skills" className="py-20 px-4 bg-transparent scroll-mt-32 panel-spacing">
-      <div className="panel-glow-wrap section-panel-bridge max-w-6xl mx-auto">
-      <div className="section-panel max-w-6xl mx-auto px-9 py-16 relative z-10">
-        <h2 className="panel-title text-4xl md:text-5xl text-center mb-16">
-          My <span className="highlight">Skills</span>
-        </h2>
+    <section id="skills" className="py-16 md:py-24 relative overflow-hidden">
+      <div className="container px-4 mx-auto relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">Technical <span className="text-gradient">Skills</span></h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            A comprehensive toolkit that enables me to build end-to-end solutions.
+          </p>
+        </motion.div>
 
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {categories.map((category, i) => {
-            const combo = gradientCombos[i % gradientCombos.length];
-            const categorySkills = skills[category] || [];
-
-            return (
-              <div
-                key={category}
-                className={cn(
-                  "relative overflow-hidden rounded-3xl p-6 text-white shadow-md transition-all duration-500 group touch-manipulation cursor-pointer",
-                  `bg-gradient-to-br ${combo}`,
-                  "hover:shadow-[0_0_40px_12px_rgba(255,165,0,0.6)] hover:scale-105 focus-within:shadow-[0_0_40px_12px_rgba(255,165,0,0.6)] focus-within:scale-105 data-[pressed=true]:shadow-[0_0_40px_12px_rgba(255,165,0,0.6)] data-[pressed=true]:scale-105"
-                )}
-                onTouchStart={(e) => e.currentTarget.setAttribute('data-pressed', 'true')}
-                onTouchEnd={(e) => e.currentTarget.removeAttribute('data-pressed')}
-                onTouchCancel={(e) => e.currentTarget.removeAttribute('data-pressed')}
-              >
-                {/* Orange Glow Ring on Hover */}
-                <div className="absolute inset-0 rounded-3xl pointer-events-none opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 data-[pressed=true]:opacity-100 transition-all duration-500 ring-4 ring-orange-400/50 blur-md"></div>
-
-                <div className="relative z-10">
-                  <h3 className="text-xl font-bold mb-4 text-center uppercase tracking-widest drop-shadow group-hover:text-orange-100 transition-colors duration-300">
-                    {category}
-                  </h3>
-                  <div className="flex flex-wrap justify-center gap-2">
-                    {categorySkills.map((skill, idx) => (
-                      <span
-                        key={idx}
-                        className="px-3 py-1 rounded-full text-sm font-medium bg-white/20 backdrop-blur-md border border-white/30 text-white hover:bg-white hover:text-black transition-all duration-300 hover:scale-110"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {skills.map((skill, index) => (
+            <motion.div
+              key={skill.category}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ y: -5 }}
+              className="p-6 rounded-3xl border border-border bg-card/50 backdrop-blur-sm hover:shadow-lg transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                  <skill.icon className="w-6 h-6" />
                 </div>
+                <h3 className="text-xl font-bold">{skill.category}</h3>
               </div>
-            );
-          })}
+              
+              <div className="flex flex-wrap gap-2">
+                {skill.items.map((item) => (
+                  <span 
+                    key={item} 
+                    className="px-3 py-1.5 rounded-lg text-sm font-medium bg-secondary text-secondary-foreground border border-border/50 hover:border-primary/50 transition-colors cursor-default"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </div>
-  </div>
-  </div>
+      </div>
     </section>
   );
 };

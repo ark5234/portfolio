@@ -1,45 +1,108 @@
-import { ArrowDown } from "lucide-react";
+﻿import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 export const HeroSection = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
 
-  
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
   return (
     <section
       id="hero"
-      className="hero-backdrop relative flex flex-col items-center justify-center px-4 overflow-hidden transition-colors duration-500 pt-40 pb-24 scroll-mt-32"
+      ref={ref}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
     >
-      <div className="panel-glow-wrap section-panel-bridge max-w-6xl mx-auto w-full">
-      <div className="section-panel max-w-6xl mx-auto w-full px-9 py-40 relative z-10">
-      {/* Subtle Background Glow or Stars */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/2 w-[600px] h-[600px] bg-gradient-radial from-purple-400/20 via-transparent to-transparent rounded-full blur-3xl transform -translate-x-1/2" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-gradient-radial from-teal-400/20 via-transparent to-transparent rounded-full blur-2xl" />
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] animate-pulse-subtle" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] animate-pulse-subtle delay-1000" />
       </div>
 
-      {/* Hero Content */}
-      <div className="relative z-10 max-w-4xl mx-auto text-center flex flex-col justify-center">
-        <div className="space-y-6">
-          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
-            <span className="block opacity-0 animate-fade-in-delay-1 text-white drop-shadow-md">
-                  Hello, I'm
-            </span>
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-blue-500 to-purple-600 dark:from-teal-400 dark:via-blue-400 dark:to-purple-500 animate-gradient-slow opacity-0 animate-fade-in-delay-2 drop-shadow">
-              Vikrant Kawadkar
-            </span>
-          </h1>
-          <p className="text-lg md:text-2xl block max-w-2xl mx-auto opacity-0 animate-fade-in-delay-4 text-white/80">
-                  A passionate web developer crafting immersive experiences and intuitive digital interfaces.
-          </p>
-        </div>
-      </div>
+      <motion.div 
+        style={{ y, opacity }}
+        className="container px-4 relative z-10 text-center"
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="inline-block mb-4 px-4 py-1.5 rounded-full border border-border bg-secondary/50 backdrop-blur-sm text-sm font-medium text-muted-foreground"
+        >
+          Available for freelance work
+        </motion.div>
 
-      {/* Scroll Indicator */}
-  <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-fade-in-delay-6">
-        <span className="text-sm text-gray-600 dark:text-gray-400 mb-2">Scroll</span>
-        <ArrowDown className="h-6 w-6 text-blue-500 dark:text-teal-400 animate-bounce" />
-      </div>
-  </div>
-  </div>
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6"
+        >
+          Building <span className="text-gradient">Digital</span>
+          <br />
+          Experiences
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
+        >
+          I'm Vikrant Kawadkar, a passionate developer crafting intuitive and performant web applications with modern technologies.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+        >
+          <a
+            href="#projects"
+            className="px-8 py-4 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity w-full sm:w-auto"
+          >
+            View Projects
+          </a>
+          <a
+            href="#contact"
+            className="px-8 py-4 rounded-full border border-border bg-background hover:bg-secondary transition-colors w-full sm:w-auto font-medium"
+          >
+            Contact Me
+          </a>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="mt-16 flex items-center justify-center gap-6 text-muted-foreground"
+        >
+          <a href="#" className="hover:text-foreground transition-colors">
+            <Github className="w-6 h-6" />
+          </a>
+          <a href="#" className="hover:text-foreground transition-colors">
+            <Linkedin className="w-6 h-6" />
+          </a>
+          <a href="#" className="hover:text-foreground transition-colors">
+            <Mail className="w-6 h-6" />
+          </a>
+        </motion.div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 1 }}
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
+      >
+        <ArrowDown className="w-5 h-5 text-muted-foreground" />
+      </motion.div>
     </section>
   );
 };

@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
-import { ThemeToggle} from "./ThemeToggel";
+import { Menu, X, Code2 } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
+import { motion, AnimatePresence } from "framer-motion";
 
 const navItems = [
   { name: "Home", href: "#hero" },
@@ -14,185 +15,146 @@ const navItems = [
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [active, setActive] = useState("hero");
-  const [isDarkMode, setIsDarkMode] = useState(() => document.documentElement.classList.contains('dark'));
-  // Watch for theme changes (MutationObserver catches class toggles from ThemeToggle)
-  useEffect(() => {
-    const root = document.documentElement;
-    const update = () => setIsDarkMode(root.classList.contains('dark'));
-    update();
-    const observer = new MutationObserver(update);
-    observer.observe(root, { attributes: true, attributeFilter: ['class'] });
-    window.addEventListener('storage', update);
-    return () => { observer.disconnect(); window.removeEventListener('storage', update); };
-  }, []);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const overlayRef = useRef(null);
-  const startYRef = useRef(null);
-  const bodyScrollYRef = useRef(0);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 10);
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Active section observer
   useEffect(() => {
-    const ids = navItems.map(i => i.href.replace('#',''));
-    const sections = ids.map(id => document.getElementById(id)).filter(Boolean);
-    if(!sections.length) return;
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
+    const sections = navItems.map(item => document.querySelector(item.href));
+    
+    const observerOptions = {
+      root: null,
+      rootMargin: "-50% 0px -50% 0px", // Trigger when section is in the middle of viewport
+      threshold: 0
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
           setActive(entry.target.id);
         }
       });
-    }, { rootMargin: "-40% 0px -50% 0px", threshold:[0,0.25,0.5,0.75,1]});
-    sections.forEach(sec => io.observe(sec));
-    return () => io.disconnect();
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    sections.forEach(section => {
+      if (section) observer.observe(section);
+    });
+
+    return () => sections.forEach(section => {
+      if (section) observer.unobserve(section);
+    });
   }, []);
 
-  // Robust body scroll lock (iOS-safe) when mobile menu is open
+  // Close mobile menu on scroll
   useEffect(() => {
-    const body = document.body;
-    if (isMenuOpen) {
-      bodyScrollYRef.current = window.scrollY;
-      body.style.position = "fixed";
-      body.style.top = `-${bodyScrollYRef.current}px`;
-      body.style.width = "100%";
-      body.style.overflow = "hidden";
-    } else {
-      const y = -parseInt(body.style.top || "0", 10) || 0;
-      body.style.position = "";
-      body.style.top = "";
-      body.style.width = "";
-      body.style.overflow = "";
-      if (y) window.scrollTo(0, y);
-    }
-    return () => {
-      body.style.position = "";
-      body.style.top = "";
-      body.style.width = "";
-      body.style.overflow = "";
-    };
-  }, [isMenuOpen]);
-
-  // Close menu on swipe-up gesture on the overlay
-  useEffect(() => {
-    const el = overlayRef.current;
-    if (!el) return;
-    const onTouchStart = (e) => {
-      startYRef.current = e.touches?.[0]?.clientY ?? null;
-    };
-    const onTouchMove = (e) => {
-      if (startYRef.current == null) return;
-      const currentY = e.touches?.[0]?.clientY ?? startYRef.current;
-      const delta = currentY - startYRef.current; // negative = swipe up
-      if (delta < -60) {
+    const handleScroll = () => {
+      if (isMenuOpen) {
         setIsMenuOpen(false);
-        startYRef.current = null;
       }
     };
-    const onTouchEnd = () => {
-      startYRef.current = null;
-    };
-    el.addEventListener("touchstart", onTouchStart, { passive: true });
-    el.addEventListener("touchmove", onTouchMove, { passive: true });
-    el.addEventListener("touchend", onTouchEnd, { passive: true });
-    return () => {
-      el.removeEventListener("touchstart", onTouchStart);
-      el.removeEventListener("touchmove", onTouchMove);
-      el.removeEventListener("touchend", onTouchEnd);
-    };
+
+    if (isMenuOpen) {
+      window.addEventListener("scroll", handleScroll, { passive: true });
+    }
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [isMenuOpen]);
 
-
   return (
-    <nav className="fixed top-3 left-1/2 -translate-x-1/2 z-50 w-full pointer-events-none px-4 md:px-6">
-      {/* Dynamic Island Shell */}
-      <div className={cn(
-        "mx-auto flex items-center justify-between gap-6 transition-all duration-500 pointer-events-auto",
-        "rounded-3xl shadow-[0_4px_28px_-8px_rgba(0,0,0,0.25),0_0_0_1px_rgba(255,255,255,0.35)] backdrop-blur-xl",
-        "px-5 md:px-8",
-        isScrolled ? "h-16 md:h-20 w-[min(1100px,92%)] bg-white/70 dark:bg-black/30" : "h-20 md:h-24 w-[min(1200px,95%)] bg-white/60 dark:bg-black/25"
-      )}>
-        {/* Left Cluster (Logo) */}
-        <a href="#hero" className="flex items-center gap-3 font-extrabold text-2xl md:text-3xl group relative select-none tracking-tight">
-          <span className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-pink-500 flex items-center justify-center shadow-lg transition-transform group-hover:scale-110">
-            <span className="text-white text-xl md:text-2xl font-bold drop-shadow">V</span>
-          </span>
-          <span className={cn(
-            "tracking-wide relative z-10 transition-colors duration-300",
-            !isDarkMode ? "text-slate-800 group-hover:text-orange-600" : "text-foreground group-hover:text-orange-400"
-          )}>
-            <span className="font-extrabold">VIKRANT</span><span className={cn("ml-1 font-semibold hidden sm:inline", !isDarkMode ? "text-slate-600" : "text-foreground/60")}>Portfolio</span>
-          </span>
-        </a>
-
-        {/* Center Nav (desktop) */}
-        <div className="hidden md:flex items-center gap-7 text-base lg:text-lg">
-          {navItems.map(item => {
-            const id = item.href.replace('#','');
-            const isActive = active === id;
-            return (
-              <a key={item.name} href={item.href} className={cn(
-                "relative font-semibold tracking-wide transition-colors duration-300 px-1",
-                isActive
-                  ? (!isDarkMode ? "text-orange-600" : "text-orange-300")
-                  : (!isDarkMode ? "text-slate-700 hover:text-orange-600" : "text-foreground/70 hover:text-orange-400")
-              )}>{item.name}</a>
-            );
-          })}
-        </div>
-
-        {/* Right cluster */}
-        <div className="flex items-center gap-2 md:gap-4">
-          {/* Theme toggle now also visible on mobile */}
-          <div className="block"><ThemeToggle /></div>
-          <button
-            onClick={() => setIsMenuOpen(p=>!p)}
-            className="md:hidden p-2 rounded-xl bg-white/50 dark:bg-white/10 backdrop-blur-md shadow hover:scale-105 active:scale-95 transition"
-            aria-label={isMenuOpen?"Close menu":"Open menu"}
-            aria-expanded={isMenuOpen}
-          >{isMenuOpen ? <X size={22}/> : <Menu size={22}/>}</button>
-        </div>
-      </div>
-
-      {/* Mobile Nav */}
-  <div
-    ref={overlayRef}
+    <motion.nav
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4 transition-all duration-300",
+        isScrolled ? "pt-2" : "pt-6"
+      )}
+    >
+      <div
         className={cn(
-          "fixed inset-0 bg-background/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center md:hidden transition-all duration-500",
-          isMenuOpen
-            ? "opacity-100 scale-100 pointer-events-auto"
-            : "opacity-0 scale-95 pointer-events-none"
+          "flex items-center justify-between w-full max-w-5xl px-6 py-3 rounded-full transition-all duration-300",
+          isScrolled || isMenuOpen
+            ? "bg-background/80 backdrop-blur-lg border border-border shadow-lg"
+            : "bg-transparent border border-transparent"
         )}
       >
-  <div className="flex flex-col items-center gap-10 text-3xl">
-          {navItems.map((item) => {
-            const id = item.href.replace('#','');
-            const isActive = active === id;
-            return (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={() => setIsMenuOpen(false)}
-                className={cn(
-      "font-bold transition duration-200 active:opacity-70 active:translate-y-px",
-                  isActive
-                    ? (!isDarkMode ? "text-orange-600" : "text-orange-300")
-                    : (!isDarkMode
-                        ? "text-slate-700 hover:text-orange-600"
-                        : "text-foreground/80 hover:text-orange-400")
-                )}
-              >
-                {item.name}
-              </a>
-            );
-          })}
-          <div className="active:scale-95 transition-transform"><ThemeToggle /></div>
+        {/* Logo */}
+        <a href="#hero" className="flex items-center gap-2 group">
+          <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+            <Code2 className="w-5 h-5 text-primary" />
+          </div>
+          <span className="font-bold text-lg tracking-tight">Portfolio</span>
+        </a>
+
+        {/* Desktop Nav */}
+        <div className="hidden md:flex items-center gap-1 bg-secondary/50 p-1 rounded-full border border-border/50 backdrop-blur-sm">
+          {navItems.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              onClick={() => setActive(item.href.replace("#", ""))}
+              className={cn(
+                "px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 relative",
+                active === item.href.replace("#", "")
+                  ? "text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              {active === item.href.replace("#", "") && (
+                <motion.div
+                  layoutId="activeTab"
+                  className="absolute inset-0 bg-primary rounded-full"
+                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                />
+              )}
+              <span className="relative z-10">{item.name}</span>
+            </a>
+          ))}
+        </div>
+
+        {/* Right Actions */}
+        <div className="flex items-center gap-4">
+          <ThemeToggle />
+          
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 rounded-full hover:bg-secondary transition-colors"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
       </div>
-    </nav>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute top-full left-0 right-0 p-4 md:hidden"
+          >
+            <div className="bg-card/95 backdrop-blur-xl border border-border rounded-2xl shadow-2xl p-4 flex flex-col gap-2">
+              {navItems.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="p-4 rounded-xl hover:bg-secondary transition-colors text-center font-medium"
+                >
+                  {item.name}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 };
