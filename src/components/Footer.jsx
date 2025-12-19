@@ -58,7 +58,7 @@ export const Footer = () => {
             <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <div className="p-6 rounded-2xl bg-background/50 border border-border/50 flex flex-col justify-center text-center space-y-1">
                 <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Experience</span>
-                <span className="text-lg font-bold">~2+ yrs</span>
+                <span className="text-lg font-bold">&lt;1 year</span>
               </div>
               
               <div className="p-6 rounded-2xl bg-background/50 border border-border/50 flex flex-col justify-center text-center space-y-1 lg:col-span-2">

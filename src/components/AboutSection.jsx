@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 export const AboutSection = () => {
   return (
     <section id="about" className="py-12 md:py-20 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-1/4 -left-64 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 -right-64 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
+      {/* Background Elements - Removed for performance */}
+      {/* <div className="absolute top-1/4 -left-64 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 -right-64 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" /> */}
 
       <div className="container px-4 mx-auto relative z-10">
         <motion.div

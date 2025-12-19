@@ -18,11 +18,11 @@ export const HeroSection = () => {
       ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
     >
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Background Elements - Removed for performance as AuroraBackground handles this */}
+      {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] animate-pulse-subtle" />
         <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] animate-pulse-subtle delay-1000" />
-      </div>
+      </div> */}
 
       <motion.div 
         style={{ y, opacity }}
@@ -34,7 +34,7 @@ export const HeroSection = () => {
           transition={{ duration: 0.6 }}
           className="inline-block mb-4 px-4 py-1.5 rounded-full border border-border bg-secondary/50 backdrop-blur-sm text-sm font-medium text-muted-foreground"
         >
-          Available for freelance work
+          Open to new opportunities
         </motion.div>
 
         <motion.h1
@@ -43,9 +43,9 @@ export const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6"
         >
-          Building <span className="text-gradient">Digital</span>
+          Architecting <span className="text-gradient">Scalable</span>
           <br />
-          Experiences
+          Solutions
         </motion.h1>
 
         <motion.p
@@ -54,7 +54,7 @@ export const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          I'm Vikrant Kawadkar, a passionate developer crafting intuitive and performant web applications with modern technologies.
+          I'm Vikrant Kawadkar, a full-stack engineer dedicated to building high-performance applications and intelligent systems.
         </motion.p>
 
         <motion.div

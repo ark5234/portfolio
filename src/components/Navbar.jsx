@@ -79,7 +79,7 @@ export const Navbar = () => {
         className={cn(
           "flex items-center justify-between w-full max-w-5xl px-6 py-3 rounded-full transition-all duration-300",
           isScrolled || isMenuOpen
-            ? "bg-background/80 backdrop-blur-lg border border-border shadow-lg"
+            ? "bg-background/80 backdrop-blur-md border border-border shadow-lg"
             : "bg-transparent border border-transparent"
         )}
       >
