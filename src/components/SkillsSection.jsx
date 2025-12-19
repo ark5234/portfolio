@@ -59,7 +59,7 @@ export const SkillsSection = () => {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ y: -5 }}
-              className="p-6 rounded-3xl border border-border bg-card/50 backdrop-blur-sm hover:shadow-lg transition-all duration-300 group"
+              className="p-6 rounded-3xl border border-border bg-card/50 hover:shadow-lg transition-all duration-300 group"
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">

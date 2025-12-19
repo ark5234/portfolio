@@ -37,6 +37,18 @@
   --animate-float: float 6s ease-in-out infinite;
   --animate-shimmer: shimmer 8s linear infinite;
   --animate-pulse-subtle: pulse-subtle 4s ease-in-out infinite;
+  --animate-wave: wave 2.5s infinite;
+
+  @keyframes wave {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(14deg); }
+    20% { transform: rotate(-8deg); }
+    30% { transform: rotate(14deg); }
+    40% { transform: rotate(-4deg); }
+    50% { transform: rotate(10deg); }
+    60% { transform: rotate(0deg); }
+    100% { transform: rotate(0deg); }
+  }
 
   @keyframes accordion-down {
     from { height: 0 }
@@ -70,7 +82,7 @@
       radial-gradient(hsl(var(--foreground) / 0.05) 1px, transparent 1px);
     background-size: 50px 50px;
     background-position: 0 0, 25px 25px;
-    background-attachment: fixed;
+    /* background-attachment: fixed; - Removed for performance */
   }
 }
 

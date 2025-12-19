@@ -37,25 +37,65 @@ export const HeroSection = () => {
           Open to new opportunities
         </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6"
-        >
-          Architecting <span className="text-gradient">Scalable</span>
-          <br />
-          Solutions
-        </motion.h1>
+        <div className="relative py-4 mb-8">
+          {/* Floating Shapes */}
+          <motion.div
+            animate={{ 
+              y: [0, -20, 0],
+              rotate: [0, 10, 0]
+            }}
+            transition={{ 
+              duration: 5, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
+            className="absolute -top-10 left-[10%] w-16 h-16 border-4 border-primary/20 rounded-2xl rotate-12 hidden md:block"
+          />
+          <motion.div
+            animate={{ 
+              y: [0, 30, 0],
+              rotate: [0, -20, 0]
+            }}
+            transition={{ 
+              duration: 7, 
+              repeat: Infinity, 
+              ease: "easeInOut",
+              delay: 1
+            }}
+            className="absolute top-20 right-[15%] w-20 h-20 border-4 border-blue-500/20 rounded-full hidden md:block"
+          />
+          <motion.div
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.6, 0.3]
+            }}
+            transition={{ 
+              duration: 4, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-gradient-to-r from-primary/10 to-blue-500/10 rounded-full blur-2xl"
+          />
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
-        >
-          I'm Vikrant Kawadkar, a full-stack engineer dedicated to building high-performance applications and intelligent systems.
-        </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight relative z-10 mb-6"
+          >
+            Hi, I'm <span className="text-gradient">Vikrant</span>
+            <span className="inline-block animate-wave origin-[70%_70%] ml-2">👋</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-lg md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-light"
+          >
+            A full-stack engineer dedicated to building high-performance applications and intelligent systems.
+          </motion.p>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

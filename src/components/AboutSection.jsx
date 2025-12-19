@@ -84,10 +84,7 @@ export const AboutSection = () => {
             {/* Bio */}
             <div className="space-y-4 text-base text-muted-foreground leading-relaxed">
               <p>
-                <span className="text-foreground font-semibold text-lg">Hello! I'm Vikrant.</span> I am passionate about building scalable, data-driven products. I enjoy solving end-to-end problems: architecting resilient backends, crafting performant UIs, and shipping ML features that create measurable impact.
-              </p>
-              <p>
-                Recently, I've engineered real-time MERN systems, production ML pipelines, and cloud-native developer tools serving thousands of requests per minute. My focus areas include fullstack web (React, Node, Mongo/Postgres), ML platforms (TensorFlow, PyTorch, FastAPI), and cloud deployment (Docker, Kubernetes, Azure).
+                <span className="text-foreground font-semibold text-lg">Hello! I'm Vikrant.</span> I build scalable, data-driven products by solving end-to-end problems—from resilient backends to performant UIs. My focus lies in full-stack development, ML pipelines, and cloud-native solutions that drive measurable impact.
               </p>
             </div>
 
