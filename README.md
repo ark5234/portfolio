@@ -4,9 +4,9 @@ Welcome to my personal developer portfolio website, crafted to highlight my skil
 # Live Demo: https://www.vkrant.in
 
 # Features
-Animated Starry Background — immersive visuals with meteor trails
+Aurora Background — immersive, performance-optimized ambient animations
 
-Dark / Light Theme Toggle — supports user theme preferences
+Dark / Light Theme Toggle — supports user theme preferences (defaults to Dark Mode)
 
 Responsive Design — seamless UX across desktop, tablet & mobile
 
@@ -52,8 +52,10 @@ If you are developing a production application, we recommend using TypeScript wi
 ```
 ├── public/
 ├── src/
-│   ├── components/        # Reusable UI components
-│   ├── sections/          # Hero, About, Projects, Skills, Contact
+│   ├── components/        # UI components & Page Sections
+│   ├── hooks/             # Custom React hooks
+│   ├── lib/               # Utility functions
+│   ├── pages/             # Route pages
 │   ├── assets/            # Images, icons
 │   ├── App.jsx
 │   └── main.jsx
