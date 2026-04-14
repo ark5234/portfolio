@@ -1,40 +1,31 @@
 ﻿import { Briefcase, BookOpen, Award, Download, Eye, MapPin, Calendar } from "lucide-react";
-import { motion } from "framer-motion";
 
 export const AboutSection = () => {
   return (
-    <section id="about" className="py-12 md:py-20 relative overflow-hidden">
+    <section id="about" className="content-auto py-12 md:py-20 relative overflow-hidden">
       {/* Background Elements - Removed for performance */}
       {/* <div className="absolute top-1/4 -left-64 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 -right-64 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" /> */}
 
       <div className="container px-4 mx-auto relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-10"
-        >
+        <div className="text-center mb-10">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">About <span className="text-gradient">Me</span></h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             A glimpse into my journey, skills, and what drives me.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid lg:grid-cols-12 gap-8 items-start">
           {/* Left Column: Profile Card */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-4"
-          >
+          <div className="lg:col-span-4">
             <div className="sticky top-24 p-6 rounded-3xl border border-border/50 bg-card/30 backdrop-blur-md text-center">
               <div className="relative w-40 h-40 mx-auto mb-4">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary to-blue-500 blur-lg opacity-50" />
                 <img 
                   src="/projects/my image.jpeg" 
                   alt="Vikrant Kawadkar" 
+                  loading="lazy"
+                  decoding="async"
                   className="relative w-full h-full rounded-full object-cover object-top border-4 border-background shadow-xl"
                 />
               </div>
@@ -56,7 +47,7 @@ export const AboutSection = () => {
                 </a>
                 <div className="grid grid-cols-2 gap-2">
                   <a
-                    href="/Vikrant Kawadkar resume.pdf"
+                    href="/resume.pdf"
                     download
                     className="py-2.5 rounded-xl border border-border bg-background hover:bg-secondary transition-colors flex items-center justify-center gap-2 text-xs font-medium"
                   >
@@ -72,15 +63,10 @@ export const AboutSection = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right Column: Bio & Details */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-8 space-y-6"
-          >
+          <div className="lg:col-span-8 space-y-6">
             {/* Bio */}
             <div className="space-y-4 text-base text-muted-foreground leading-relaxed">
               <p>
@@ -178,7 +164,7 @@ export const AboutSection = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

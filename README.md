@@ -14,9 +14,9 @@ Smooth Scroll Navigation — quick jumps to About, Projects, Skills, and more
 
 About & Skills Sections — informative cards with layered UI effects
 
-Projects Showcase — links to live apps and source code
+Projects Showcase — optimized local images with links to live apps and source code
 
-Creative Contact Section — styled with gradients and hover effects
+Creative Contact Section — direct endpoint submit with mailto fallback
 
 Back to Top Button — accessible and theme-aware
 
@@ -27,7 +27,7 @@ React.js	Frontend library
 
 Tailwind CSS	Styling & layout
 
-Framer Motion	Smooth animations
+CSS Animations	Smooth lightweight motion effects
 
 Lucide Icons	Icons for menu and UI elements
 
@@ -78,6 +78,16 @@ npm install
 ## 4. Start development server
 npm run dev
 ```
+
+## Contact Form Endpoint (Optional)
+
+Copy [.env.example](.env.example) to `.env` and configure:
+
+```bash
+VITE_CONTACT_ENDPOINT=https://formspree.io/f/yourFormId
+```
+
+If this variable is not set, the contact form automatically falls back to opening a pre-filled local email draft.
 
 🙋‍♂️ Author
 Vikrant

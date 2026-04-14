@@ -1,6 +1,5 @@
 ﻿import { Sun, Moon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 
 export const ThemeToggle = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -35,18 +34,19 @@ export const ThemeToggle = () => {
       onClick={toggleTheme}
       className="p-2 rounded-full hover:bg-secondary transition-colors relative overflow-hidden"
       aria-label="Toggle Theme"
+      type="button"
     >
-      <motion.div
-        initial={false}
-        animate={{ rotate: isDarkMode ? 180 : 0 }}
-        transition={{ duration: 0.5, type: "spring" }}
+      <span
+        className={`inline-flex transition-transform duration-500 ${
+          isDarkMode ? "rotate-180" : "rotate-0"
+        }`}
       >
         {isDarkMode ? (
           <Sun className="w-5 h-5 text-yellow-500" />
         ) : (
           <Moon className="w-5 h-5 text-slate-700" />
         )}
-      </motion.div>
+      </span>
     </button>
   );
 };

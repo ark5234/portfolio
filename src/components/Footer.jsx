@@ -4,7 +4,7 @@ export const Footer = () => {
   const year = new Date().getFullYear();
   
   return (
-    <footer className="py-12 bg-background relative overflow-hidden">
+    <footer className="content-auto py-12 bg-background relative overflow-hidden">
       <div className="container px-4 mx-auto">
         <div className="bg-card/30 border border-border/50 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden backdrop-blur-sm">
           {/* Content Grid */}
@@ -21,23 +21,24 @@ export const Footer = () => {
                 <a href="mailto:vikrantkawadkar2099@gmail.com" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-medium hover:opacity-90 transition-opacity">
                   <Mail className="w-4 h-4" /> Email
                 </a>
-                <a href="#" className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border hover:bg-secondary transition-colors">
+                <a href="/resume.pdf" download className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border hover:bg-secondary transition-colors">
                   <FileText className="w-4 h-4" /> Resume
                 </a>
               </div>
 
               <div className="flex gap-3 pt-2">
                 {[
-                  { icon: Github, href: "https://github.com/ark5234" },
-                  { icon: Linkedin, href: "https://linkedin.com/in/vikrant-kawadkar-0b9073251" },
-                  { icon: Twitter, href: "https://x.com/KawadkarVikrant" },
-                  { icon: Mail, href: "mailto:vikrantkawadkar2099@gmail.com" }
+                  { icon: Github, href: "https://github.com/ark5234", label: "GitHub", external: true },
+                  { icon: Linkedin, href: "https://linkedin.com/in/vikrant-kawadkar-0b9073251", label: "LinkedIn", external: true },
+                  { icon: Twitter, href: "https://x.com/KawadkarVikrant", label: "X", external: true },
+                  { icon: Mail, href: "mailto:vikrantkawadkar2099@gmail.com", label: "Email", external: false }
                 ].map((social, i) => (
                   <a 
                     key={i}
                     href={social.href}
-                    target="_blank"
-                    rel="noreferrer"
+                    target={social.external ? "_blank" : undefined}
+                    rel={social.external ? "noopener noreferrer" : undefined}
+                    aria-label={social.label}
                     className="p-3 rounded-xl bg-secondary/50 hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                   >
                     <social.icon className="w-5 h-5" />

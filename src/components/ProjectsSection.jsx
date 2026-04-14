@@ -1,6 +1,5 @@
-﻿import { ArrowRight, ExternalLink, Github, Code2, Sparkles, Star, ChevronDown, ChevronUp } from "lucide-react";
+﻿import { ArrowRight, ExternalLink, Github, Code2, Star, ChevronDown, ChevronUp } from "lucide-react";
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
 const projects = [
   {
@@ -10,7 +9,8 @@ const projects = [
     technologies: ["React", "Node.js", "MongoDB", "Docker"],
     githubUrl: "https://github.com/ark5234/Online-Judge-Codester",
     liveUrl: "https://online-judge-codester.vercel.app",
-    imageUrl: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=500&fit=crop",
+    imageUrl: "/projects/project1.jpg",
+    imageAlt: "Online Judge Codester platform screenshot",
     featured: true
   },
   {
@@ -20,7 +20,8 @@ const projects = [
     technologies: ["React", "FastAPI", "Python", "Scikit-learn"],
     githubUrl: "https://github.com/ark5234/customer-churn-dashboard",
     liveUrl: "https://customer-churn-dashboard-three.vercel.app",
-    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop",
+    imageUrl: "/projects/project2.jpg",
+    imageAlt: "Customer churn analytics dashboard screenshot",
     featured: true
   },
   {
@@ -30,7 +31,8 @@ const projects = [
     technologies: ["Python", "OpenAI", "TensorFlow", "NLP"],
     githubUrl: "https://github.com/ark5234/AI-Agent-Project",
     liveUrl: "https://ai-data-analytics-agent.streamlit.app/",
-    imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=500&h=300&fit=crop",
+    imageUrl: "/projects/project3.jpg",
+    imageAlt: "AI agent project interface screenshot",
     featured: true
   },
   {
@@ -40,7 +42,8 @@ const projects = [
     technologies: ["Python", "ML", "Pandas"],
     githubUrl: "https://github.com/ark5234/Fraud-Detection-System",
     liveUrl: "https://fraud-detection-web.streamlit.app/",
-    imageUrl: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=500&h=300&fit=crop",
+    imageUrl: null,
+    imageAlt: "Fraud detection project cover",
     featured: false
   },
   {
@@ -50,7 +53,8 @@ const projects = [
     technologies: ["Python", "Healthcare AI", "Scikit-learn"],
     githubUrl: "https://github.com/ark5234/Sepsis-Detection-Model",
     liveUrl: null,
-    imageUrl: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=500&h=300&fit=crop",
+    imageUrl: null,
+    imageAlt: "Sepsis detection project cover",
     featured: false
   },
   {
@@ -60,7 +64,8 @@ const projects = [
     technologies: ["Python", "TensorFlow", "Deep Learning"],
     githubUrl: "https://github.com/ark5234/Brain-Tumor-Model",
     liveUrl: null,
-    imageUrl: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=500&h=300&fit=crop",
+    imageUrl: null,
+    imageAlt: "Brain tumor classification project cover",
     featured: false
   },
   {
@@ -70,28 +75,46 @@ const projects = [
     technologies: ["Python", "Pygame", "Game Theory"],
     githubUrl: "https://github.com/ark5234/ai_game",
     liveUrl: null,
-    imageUrl: "https://images.unsplash.com/photo-1611996991210-8e969746983e?w=500&h=300&fit=crop",
+    imageUrl: null,
+    imageAlt: "AI game project cover",
     featured: false
   }
 ];
 
+const fallbackGradients = [
+  "from-cyan-500/20 to-blue-500/15",
+  "from-indigo-500/20 to-violet-500/15",
+  "from-emerald-500/20 to-cyan-500/15",
+  "from-orange-500/20 to-rose-500/15",
+];
+
 const ProjectCard = ({ project, index }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay: index * 0.1 }}
-    className="group relative bg-card rounded-3xl border border-border/50 overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 flex flex-col h-full"
-  >
+  <article className="group relative bg-card rounded-3xl border border-border/50 overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
     {/* Image Section */}
     <div className="relative h-52 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent z-10 opacity-60" />
-      <img 
-        src={project.imageUrl} 
-        alt={project.name} 
-        loading="lazy"
-        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 will-change-transform"
-      />
+      {project.imageUrl ? (
+        <>
+          <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent z-10 opacity-60" />
+          <img 
+            src={project.imageUrl}
+            alt={project.imageAlt || project.name}
+            loading="lazy"
+            decoding="async"
+            width="1280"
+            height="720"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+          />
+        </>
+      ) : (
+        <div className={`absolute inset-0 bg-gradient-to-br ${fallbackGradients[index % fallbackGradients.length]}`}>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,hsl(var(--foreground)/0.12),transparent_50%)]" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground/80 gap-3">
+            <Code2 className="w-10 h-10" />
+            <p className="text-sm font-medium tracking-wide uppercase">Project Preview</p>
+          </div>
+        </div>
+      )}
       
       {/* Floating Links */}
       <div className="absolute top-4 right-4 z-20 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
@@ -147,7 +170,7 @@ const ProjectCard = ({ project, index }) => (
         ))}
       </div>
     </div>
-  </motion.div>
+  </article>
 );
 
 export const ProjectsSection = () => {
@@ -165,7 +188,7 @@ export const ProjectsSection = () => {
   };
 
   return (
-    <section id="projects" className="py-20 md:py-32 relative overflow-hidden">
+    <section id="projects" className="content-auto py-20 md:py-32 relative overflow-hidden">
       {/* Background Decoration */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
         <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl" />
@@ -174,25 +197,16 @@ export const ProjectsSection = () => {
 
       <div className="container px-4 mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="max-w-2xl"
-          >
+          <div className="max-w-2xl">
             <h2 className="text-3xl md:text-5xl font-bold mb-4">
               Featured <span className="text-gradient">Projects</span>
             </h2>
             <p className="text-muted-foreground text-lg">
               Explore a collection of my recent work, from full-stack applications to AI models.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
+          <div>
             <a
               href="https://github.com/ark5234"
               target="_blank"
@@ -201,15 +215,13 @@ export const ProjectsSection = () => {
             >
               View GitHub <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
-          </motion.div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          <AnimatePresence mode="popLayout">
-            {projects.slice(0, visibleCount).map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
-            ))}
-          </AnimatePresence>
+          {projects.slice(0, visibleCount).map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
+          ))}
         </div>
 
         {projects.length > 3 && (
@@ -217,6 +229,7 @@ export const ProjectsSection = () => {
             <button
               onClick={toggleProjects}
               className="group flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 transition-all hover:scale-105 active:scale-95"
+              type="button"
             >
               {isExpanded ? (
                 <>

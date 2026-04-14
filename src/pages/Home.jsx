@@ -1,4 +1,3 @@
-import { ThemeToggle } from "../components/ThemeToggle";
 import { AuroraBackground } from "../components/AuroraBackground";
 import { Navbar } from "../components/Navbar";
 import { HeroSection } from "../components/HeroSection";

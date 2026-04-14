@@ -1,5 +1,4 @@
-﻿import { motion } from "framer-motion";
-import { Code2, Database, Layout, Server, Terminal, Cpu } from "lucide-react";
+﻿import { Code2, Database, Layout, Server, Terminal, Cpu } from "lucide-react";
 
 const skills = [
   {
@@ -36,30 +35,20 @@ const skills = [
 
 export const SkillsSection = () => {
   return (
-    <section id="skills" className="py-16 md:py-24 relative overflow-hidden">
+    <section id="skills" className="content-auto py-16 md:py-24 relative overflow-hidden">
       <div className="container px-4 mx-auto relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">Technical <span className="text-gradient">Skills</span></h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             A comprehensive toolkit that enables me to build end-to-end solutions.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {skills.map((skill, index) => (
-            <motion.div
+          {skills.map((skill) => (
+            <div
               key={skill.category}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
-              className="p-6 rounded-3xl border border-border bg-card/50 hover:shadow-lg transition-all duration-300 group"
+              className="p-6 rounded-3xl border border-border bg-card/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
@@ -78,7 +67,7 @@ export const SkillsSection = () => {
                   </span>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
